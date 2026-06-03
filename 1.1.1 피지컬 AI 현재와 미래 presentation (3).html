@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI와 젠슨황의 미래 | ZETABANK</title>
+<style>
+/* ── 리셋 & 기본 ── */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:#0a0a0f;color:#e2e8f0;font-family:'Segoe UI','Apple SD Gothic Neo','Malgun Gothic',sans-serif;overflow-x:hidden}
+
+/* ── 진행바 ── */
+#pb{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#06b6d4,#a78bfa,#06b6d4);background-size:200%;z-index:9999;width:0;transition:width .1s}
+
+/* ── 네비게이션 (스킬 패턴: data-target + justify-content:center) ── */
+#top-nav{
+  position:fixed;top:4px;left:0;right:0;
+  display:flex;justify-content:center;gap:5px;padding:0 12px;
+  z-index:900;overflow-x:auto;scrollbar-width:none
+}
+#top-nav::-webkit-scrollbar{display:none}
+.nav-item{
+  flex:0 0 auto;padding:8px 16px;
+  border:none;border-radius:0 0 8px 8px;
+  color:#fff;font-size:0.78rem;font-weight:700;
+  cursor:pointer;opacity:.72;letter-spacing:.03em;
+  transition:opacity .2s,filter .2s,transform .15s;white-space:nowrap
+}
+.nav-item:hover{opacity:1;filter:brightness(1.25);transform:translateY(1px)}
+.nav-item.active{opacity:1;filter:brightness(1.4);box-shadow:inset 0 -3px 0 rgba(255,255,255,.9);transform:translateY(2px)}
+
+/* ── 섹션 공통 ── */
+section{scroll-margin-top:54px;position:relative;overflow:hidden}
+.inner{max-width:1100px;width:100%;margin:0 auto;padding:0 2rem}
+
+/* ── AOS 애니메이션 ── */
+.aos{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s ease}
+.aos.visible{opacity:1;transform:translateY(0)}
+.aos-l{opacity:0;transform:translateX(-44px);transition:opacity .75s ease,transform .75s ease}
+.aos-l.visible{opacity:1;transform:translateX(0)}
+.aos-s{opacity:0;transform:scale(.88);transition:opacity .6s ease,transform .6s ease}
+.aos-s.visible{opacity:1;transform:scale(1)}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.35s}.d4{transition-delay:.5s}
+
+/* ── 카드 ── */
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:1.6rem;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-3px);border-color:rgba(6,182,212,.3)}
+.ci{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.1rem;flex-shrink:0}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:1.4rem}
+
+/* ── 태그 ── */
+.tag{display:inline-block;padding:4px 14px;border-radius:20px;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.9rem}
+.tc{background:rgba(6,182,212,.14);color:#06b6d4;border:1px solid rgba(6,182,212,.3)}
+.tp{background:rgba(167,139,250,.14);color:#a78bfa;border:1px solid rgba(167,139,250,.3)}
+.tg{background:rgba(16,185,129,.14);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+.ta{background:rgba(245,158,11,.14);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
+.tr{background:rgba(248,113,113,.14);color:#f87171;border:1px solid rgba(248,113,113,.3)}
+.ti{background:rgba(129,140,248,.14);color:#818cf8;border:1px solid rgba(129,140,248,.3)}
+
+/* ── 타이틀 ── */
+.stit{font-size:clamp(1.75rem,3.5vw,2.7rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:.4rem}
+.ssub{color:#64748b;margin-bottom:2.2rem;font-size:.97rem}
+.hl-c{color:#06b6d4}.hl-p{color:#a78bfa}.hl-g{color:#10b981}.hl-a{color:#f59e0b}.hl-r{color:#f87171}.hl-i{color:#818cf8}
+
+/* ── 챕터 히어로 레이아웃 ── */
+.ch-hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;padding:5.5rem 2rem;max-width:1100px;margin:0 auto}
+@media(max-width:768px){
+  .ch-hero{grid-template-columns:1fr;text-align:center;padding:5rem 1.5rem}
+  .nav-item{padding:7px 10px;font-size:.7rem}
+}
+
+/* ── spot-card (관광지 히어로) ── */
+.spot-card{
+  border-radius:20px;min-height:34vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  position:relative;overflow:hidden;text-align:center;
+  border:1px solid rgba(255,255,255,.1);padding:2.5rem 1.5rem
+}
+.sce{font-size:clamp(5rem,13vw,9.5rem);line-height:1;margin-bottom:.5rem}
+.sci{text-align:center}
+.sf{font-size:1.3rem;margin-bottom:.25rem}
+.sn{font-size:1.15rem;font-weight:900;color:#fff;margin:.2rem 0}
+.sd{width:38px;height:2px;background:rgba(255,255,255,.28);margin:.45rem auto}
+.ss{font-size:.77rem;color:rgba(255,255,255,.58);margin-bottom:.15rem}
+.sr{font-size:.72rem;color:rgba(255,255,255,.4)}
+
+/* ── 타임라인 ── */
+.tl{position:relative;padding-left:2rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#06b6d4,#a78bfa)}
+.tli{position:relative;padding:1.4rem 1.4rem 1.4rem 1.8rem;margin-bottom:.9rem;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06)}
+.tld{position:absolute;left:-2.55rem;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;border:2px solid #06b6d4;background:#0a0a0f}
+
+/* ── 비교(좌우) ── */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:16px;overflow:hidden}
+.cml{padding:2.2rem;background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:16px 0 0 16px}
+.cmr{padding:2.2rem;background:rgba(6,182,212,.05);border:1px solid rgba(6,182,212,.2);border-radius:0 16px 16px 0}
+@media(max-width:600px){.cmp{grid-template-columns:1fr}.cml{border-radius:16px 16px 0 0}.cmr{border-radius:0 0 16px 16px}}
+
+/* ── 수치 강조 ── */
+.stat-big{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:900;background:linear-gradient(135deg,#06b6d4,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+
+/* ── 표 ── */
+table.st{width:100%;border-collapse:collapse;font-size:.88rem;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+table.st th{background:rgba(6,182,212,.15);color:#06b6d4;padding:11px 15px;text-align:left;font-weight:700;border-bottom:1px solid rgba(6,182,212,.2)}
+table.st td{padding:10px 15px;border-bottom:1px solid rgba(255,255,255,.05);color:#cbd5e1;vertical-align:top}
+table.st tr:last-child td{border-bottom:none}
+table.st tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+table.st tr:hover td{background:rgba(6,182,212,.04)}
+
+/* ── 단계 배지 ── */
+.sb{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;font-size:.82rem;font-weight:900;margin-right:.65rem;flex-shrink:0}
+
+/* ── video-slide ── */
+.vs-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.vs-wrap::before{content:'▶';position:absolute;font-size:30vw;opacity:.04;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;color:#06b6d4}
+.vs-box{background:rgba(0,0,0,.6);border:1px solid rgba(6,182,212,.2);border-radius:20px;padding:2.8rem;max-width:700px;width:90%;position:relative;z-index:2}
+.vpa{background:#000;border-radius:12px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;margin:1.4rem 0;overflow:hidden}
+.vpa video{width:100%;height:100%;object-fit:contain;border-radius:12px}
+.vph{color:rgba(255,255,255,.3);text-align:center}
+.vub{display:inline-block;padding:11px 26px;background:rgba(6,182,212,.14);border:1px solid rgba(6,182,212,.4);border-radius:30px;color:#06b6d4;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:.9rem}
+.vub:hover{background:rgba(6,182,212,.28)}
+
+/* ── think-corner-slide ── */
+.think-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:linear-gradient(135deg,#1a1200 0%,#2d1f00 50%,#1a1200 100%)}
+.think-wrap::before{content:'💡';position:absolute;font-size:26vw;opacity:.07;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.think-box{position:relative;z-index:2;max-width:820px;padding:2rem;width:90%}
+
+/* ── closing-corner-slide ── */
+.cl-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#080818,#110830,#080818);position:relative}
+
+/* ── 플로팅 TOC ── */
+#toc-btn{position:fixed;right:1.4rem;bottom:2rem;z-index:800;width:42px;height:42px;border-radius:50%;background:rgba(6,182,212,.18);border:1px solid rgba(6,182,212,.4);color:#06b6d4;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s}
+#toc-btn:hover{background:rgba(6,182,212,.32)}
+#toc-panel{position:fixed;right:1.4rem;bottom:5rem;z-index:799;background:rgba(8,8,20,.96);border:1px solid rgba(6,182,212,.18);border-radius:12px;padding:.9rem;min-width:195px;display:none;backdrop-filter:blur(20px)}
+#toc-panel a{display:block;padding:6px 8px;color:#94a3b8;font-size:.79rem;text-decoration:none;border-radius:6px;transition:all .2s;cursor:pointer}
+#toc-panel a:hover{color:#06b6d4;background:rgba(6,182,212,.1)}
+
+/* ── 그리드 패턴 배경 ── */
+.bg-grid::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(6,182,212,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.025) 1px,transparent 1px);background-size:55px 55px;pointer-events:none}
+
+/* ── 글로우 오브 ── */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.3}
+.oc{background:radial-gradient(circle,rgba(6,182,212,.6) 0%,transparent 70%)}
+.op{background:radial-gradient(circle,rgba(139,92,246,.6) 0%,transparent 70%)}
+.oa{background:radial-gradient(circle,rgba(245,158,11,.6) 0%,transparent 70%)}
+.og{background:radial-gradient(circle,rgba(16,185,129,.6) 0%,transparent 70%)}
+
+/* ── blink 키프레임 ── */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.28}}
+</style>
+</head>
+<body>
+
+<div id="pb"></div>
+
+<!-- ★ 네비게이션: data-target 방식 (href="#" 절대 금지) -->
+<nav id="top-nav">
+  <button class="nav-item" data-target="section-0"  style="background:#0e3a5c">🏠 홈</button>
+  <button class="nav-item" data-target="section-1"  style="background:#0a2d4a">① Agentic AI</button>
+  <button class="nav-item" data-target="section-5"  style="background:#2d0a4a">② GPU·컴퓨팅</button>
+  <button class="nav-item" data-target="section-9"  style="background:#0a3d1a">③ Physical AI</button>
+  <button class="nav-item" data-target="section-14" style="background:#3d2a00">④ VLA·로봇</button>
+  <button class="nav-item" data-target="section-18" style="background:#3d0a0a">⑤ 스케일링</button>
+  <button class="nav-item" data-target="section-21" style="background:#1a0a3d">⑥ 산업 영향</button>
+</nav>
+
+<!-- 플로팅 TOC -->
+<button id="toc-btn" aria-label="목차">☰</button>
+<div id="toc-panel">
+  <div style="color:#06b6d4;font-size:.73rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.08em">목차</div>
+  <a data-jump="section-0">🚀 메인 소개</a>
+  <a data-jump="section-1">① Agentic AI란?</a>
+  <a data-jump="section-5">② GPU·생성형 컴퓨팅</a>
+  <a data-jump="section-9">③ Physical AI 진화</a>
+  <a data-jump="section-14">④ VLA·로봇 AI</a>
+  <a data-jump="section-18">⑤ 스케일링 법칙</a>
+  <a data-jump="section-21">⑥ 글로벌 산업 영향</a>
+  <a data-jump="section-last">🎓 마무리</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     SECTION 0 — 메인 히어로
+     ══════════════════════════════════════ -->
+<section id="section-0" style="min-height:100vh;background:linear-gradient(135deg,#040410 0%,#08081e 50%,#040d14 100%);display:flex;align-items:center;justify-content:center;text-align:center">
+  <div class="orb oc" style="width:560px;height:560px;top:-80px;left:-120px"></div>
+  <div class="orb op" style="width:480px;height:480px;bottom:-80px;right:-80px"></div>
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(6,182,212,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.035) 1px,transparent 1px);background-size:48px 48px"></div>
+  <div style="position:relative;z-index:2;padding:2rem;max-width:920px">
+    <div class="aos" style="display:inline-flex;align-items:center;gap:8px;padding:7px 20px;border:1px solid rgba(6,182,212,.4);border-radius:30px;margin-bottom:2rem;color:#06b6d4;font-size:.78rem;letter-spacing:.1em">
+      <span style="width:7px;height:7px;background:#06b6d4;border-radius:50%;animation:blink 1.6s infinite"></span>
+      ZETABANK · 가장 혁신적인 로봇 플랫폼
+    </div>
+    <h1 class="aos d1" style="font-size:clamp(2.4rem,7vw,5.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:1.4rem;letter-spacing:-.02em">
+      <span class="hl-c">Agentic AI</span>와<br>젠슨황의 미래
+    </h1>
+    <p class="aos d2" style="font-size:clamp(.95rem,2vw,1.25rem);color:rgba(255,255,255,.48);max-width:640px;margin:0 auto 2.4rem;line-height:1.75">
+      생성형 AI → Agentic AI → Physical AI<br>단순히 답하던 AI가 이제 생각하고 행동합니다
+    </p>
+    <div class="aos d3" style="display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap">
+      <div style="background:rgba(6,182,212,.09);border:1px solid rgba(6,182,212,.22);border-radius:12px;padding:.9rem 1.8rem;text-align:center">
+        <div class="stat-big" style="font-size:1.9rem">32p</div>
+        <div style="color:#64748b;font-size:.77rem;margin-top:.2rem">원본 PDF</div>
+      </div>
+      <div style="background:rgba(139,92,246,.09);border:1px solid rgba(139,92,246,.22);border-radius:12px;padding:.9rem 1.8rem;text-align:center">
+        <div class="stat-big" style="font-size:1.9rem;background:linear-gradient(135deg,#a78bfa,#06b6d4);-webkit-background-clip:text">6</div>
+        <div style="color:#64748b;font-size:.77rem;margin-top:.2rem">챕터</div>
+      </div>
+      <div style="background:rgba(16,185,129,.09);border:1px solid rgba(16,185,129,.22);border-radius:12px;padding:.9rem 1.8rem;text-align:center">
+        <div class="stat-big" style="font-size:1.9rem;background:linear-gradient(135deg,#10b981,#06b6d4);-webkit-background-clip:text">T03</div>
+        <div style="color:#64748b;font-size:.77rem;margin-top:.2rem">dark-cards 템플릿</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 1: Agentic AI란?
+     ══════════════════════════════════════ -->
+<section id="section-1" style="background:linear-gradient(160deg,#05101e,#071828);padding:0">
+  <div class="ch-hero" id="ch1-hero">
+    <div>
+      <div class="tag tc aos">CHAPTER 01</div>
+      <h2 class="stit aos d1">Agentic AI란?<br><span class="hl-c">오케스트라처럼 움직이는 AI</span></h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">
+        단순히 답변하는 AI를 넘어, 스스로 생각하고 계획하고 행동하는 인공지능. AI Agent와의 차이, 추론 능력이 왜 혁신인지 살펴봅니다.
+      </p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc1"></div>
+  </div>
+</section>
+
+<!-- 1-2 AI Agent vs Agentic AI -->
+<section id="section-2" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tc aos">개념 비교</div>
+    <h2 class="stit aos d1">AI Agent vs <span class="hl-c">Agentic AI</span></h2>
+    <p class="ssub aos d2">에이전트형 AI는 오케스트라 지휘자처럼 개별 AI 에이전트 전체를 지휘합니다</p>
+    <div class="cmp aos d2" style="margin-bottom:2.4rem">
+      <div class="cml">
+        <div style="color:#f87171;font-size:.74rem;font-weight:800;letter-spacing:.1em;margin-bottom:.9rem">🤖 AI AGENT</div>
+        <ul style="color:#94a3b8;list-style:none;padding:0;line-height:2.1">
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">개별 과업 처리에 특화</li>
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">단일 LLM + 도구 사용</li>
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">지시받은 범위 내 행동</li>
+          <li style="padding:.45rem 0">오케스트라의 연주자</li>
+        </ul>
+      </div>
+      <div class="cmr">
+        <div style="color:#06b6d4;font-size:.74rem;font-weight:800;letter-spacing:.1em;margin-bottom:.9rem">🧠 AGENTIC AI</div>
+        <ul style="color:#e2e8f0;list-style:none;padding:0;line-height:2.1">
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">다수의 AI 에이전트를 조율·지시</li>
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">복수 에이전트 시스템 전체 관리</li>
+          <li style="border-bottom:1px solid rgba(255,255,255,.05);padding:.45rem 0">복잡한 다단계 목표 자율 완료</li>
+          <li style="padding:.45rem 0">오케스트라의 <strong style="color:#06b6d4">지휘자</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="card aos d1"><div class="ci" style="background:rgba(6,182,212,.14)">🎯</div><h3 style="color:#fff;font-size:.97rem;margin-bottom:.45rem">자율적 판단</h3><p style="color:#94a3b8;font-size:.87rem;line-height:1.7">최소한의 인간 개입으로 독립적으로 행동하고, 결정을 내리고, 복잡한 다단계 작업을 완료</p></div>
+      <div class="card aos d2"><div class="ci" style="background:rgba(139,92,246,.14)">🔄</div><h3 style="color:#fff;font-size:.97rem;margin-bottom:.45rem">능동적 학습</h3><p style="color:#94a3b8;font-size:.87rem;line-height:1.7">학습하고, 계획하고, 환경에 적응하여 목표를 달성하는 능동적 지능 시스템</p></div>
+      <div class="card aos d3"><div class="ci" style="background:rgba(16,185,129,.14)">🔗</div><h3 style="color:#fff;font-size:.97rem;margin-bottom:.45rem">멀티 에이전트</h3><p style="color:#94a3b8;font-size:.87rem;line-height:1.7">DB·LLM·Vector DB·Action 모듈을 연결하는 Data Flywheel과 Model Customization 구조</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 1-3 왜 추론 능력이 혁신적인가 -->
+<section id="section-3" style="background:linear-gradient(135deg,#070712,#0e0820);padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tp aos">추론의 혁신</div>
+    <h2 class="stit aos d1">왜 <span class="hl-p">추론 능력</span>이 혁신적인가?</h2>
+    <p class="ssub aos d2">Test-Time Scaling — "더 오래 생각할수록 더 좋은 답을 낸다"</p>
+    <div class="g2" style="margin-bottom:1.5rem">
+      <div class="aos d1">
+        <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.16);border-radius:16px;padding:1.8rem">
+          <h3 style="color:#f87171;margin-bottom:.9rem;font-size:1rem">❌ 기존 생성형 AI(LLM)의 한계</h3>
+          <ul style="color:#94a3b8;line-height:2.1;list-style:none;padding:0;font-size:.9rem">
+            <li>• 입력 → 출력을 빠르게 수행하는 데만 초점</li>
+            <li>• 복잡한 업무·물리적 제어 처리 부족</li>
+            <li>• 로봇·자동차 등 연속적 판단/행동 루프 미지원</li>
+            <li>• 단발성(One-shot) 또는 몇 단계 Chain-of-Thought만 가능</li>
+          </ul>
+        </div>
+      </div>
+      <div class="aos d2">
+        <div style="background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.16);border-radius:16px;padding:1.8rem">
+          <h3 style="color:#06b6d4;margin-bottom:.9rem;font-size:1rem">✅ Agentic AI의 혁신 포인트</h3>
+          <ul style="color:#e2e8f0;line-height:2.1;list-style:none;padding:0;font-size:.9rem">
+            <li>• <strong style="color:#06b6d4">관찰→이해→계획→행동</strong> 연속 루프 자율 수행</li>
+            <li>• 로봇, 자율주행, 자동화 시스템에 직접 적용</li>
+            <li>• 추론(Reasoning) 연산량이 기존 예상을 크게 초과</li>
+            <li>• 새로운 아키텍처·컴퓨팅 모델 필요성 대두</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="aos d3" style="background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:14px;padding:1.6rem;text-align:center">
+      <p style="color:#fff;font-weight:700;margin-bottom:.3rem">💡 핵심 차별화</p>
+      <p style="color:#94a3b8;font-size:.92rem">단순 <em>생성</em>에서 <span style="color:#a78bfa;font-weight:700">생각하고 행동하는 AI</span>로의 패러다임 전환</p>
+      <p style="color:#64748b;font-size:.82rem;margin-top:.4rem">Jensen Huang: <em>"AI will be talking to itself"</em> — 내부적으로 여러 추론 경로를 돌려 비교·검증</p>
+    </div>
+  </div>
+</section>
+
+<!-- 1-4 LLM vs Agentic AI 기능 비교 + 기술 구조 -->
+<section id="section-4" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tc aos">기능 & 구조</div>
+    <h2 class="stit aos d1">Agentic AI가 <span class="hl-c">추가·강화</span>하는 기능</h2>
+    <div class="g2" style="margin-bottom:2rem">
+      <div class="g2" style="grid-template-columns:1fr 1fr;gap:.8rem">
+        <div class="card aos d1" style="padding:1.3rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🧩</div><h4 style="color:#06b6d4;font-size:.9rem;margin-bottom:.3rem">추론(Reasoning)</h4><p style="color:#64748b;font-size:.82rem">다단계 문제 분석, 전략 수립, 최적 경로 탐색</p></div>
+        <div class="card aos d2" style="padding:1.3rem"><div style="font-size:1.4rem;margin-bottom:.4rem">📋</div><h4 style="color:#a78bfa;font-size:.9rem;margin-bottom:.3rem">계획(Planning)</h4><p style="color:#64748b;font-size:.82rem">"다음 행동을 할지"까지 미리 생각하고 설계</p></div>
+        <div class="card aos d3" style="padding:1.3rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🦾</div><h4 style="color:#10b981;font-size:.9rem;margin-bottom:.3rem">행동(Acting)</h4><p style="color:#64748b;font-size:.82rem">관찰→계획→행동 루프, 로봇·자율주행 적용</p></div>
+        <div class="card aos d4" style="padding:1.3rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🌍</div><h4 style="color:#f59e0b;font-size:.9rem;margin-bottom:.3rem">Physical AI</h4><p style="color:#64748b;font-size:.82rem">물리적 인과관계·물체 영속성·관성·마찰 이해</p></div>
+      </div>
+      <div class="aos d2">
+        <div class="card" style="border-color:rgba(6,182,212,.2);height:100%">
+          <h3 style="color:#06b6d4;margin-bottom:1rem;font-size:.97rem">🏗️ Agentic AI 실체 구조</h3>
+          <div style="margin-bottom:1.2rem">
+            <div style="color:#06b6d4;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Layer 1 — AI 모델링 (Research Layer)</div>
+            <ul style="color:#94a3b8;font-size:.85rem;line-height:1.9;list-style:none;padding:0">
+              <li>├ 모델 설계 (Transformer, Diffusion, etc.)</li>
+              <li>├ 학습 데이터, GPU, 파라미터 조정</li>
+              <li style="color:#e2e8f0">└ 결과물: GPT / Gemini / Claude / LLaMA</li>
+            </ul>
+          </div>
+          <div>
+            <div style="color:#a78bfa;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem">Layer 2 — 프롬프트 엔지니어링 (Application Layer)</div>
+            <ul style="color:#94a3b8;font-size:.85rem;line-height:1.9;list-style:none;padding:0">
+              <li>├ 프롬프트 설계 (CoT, Few-shot, ReAct)</li>
+              <li>├ 도구 연결 (검색·코드·RAG)</li>
+              <li style="color:#e2e8f0">└ 결과물: 챗봇, 업무 비서, 로봇 제어 AI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 2: GPU·생성형 컴퓨팅
+     ══════════════════════════════════════ -->
+<section id="section-5" style="background:linear-gradient(160deg,#0d0520,#180830);padding:0">
+  <div class="ch-hero">
+    <div>
+      <div class="tag tp aos">CHAPTER 02</div>
+      <h2 class="stit aos d1">GPU와<br><span class="hl-p">생성형 컴퓨팅</span>의 전환</h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">30년 전 CPU가 GPU보다 비쌌던 시절에서, 지금은 GPU가 압도합니다. 이 컴퓨팅 패러다임 전환이 AI 혁명의 토대입니다.</p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc2"></div>
+  </div>
+</section>
+
+<!-- 2-2 GPU 가격 역전 -->
+<section id="section-6" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tp aos">가격 혁명</div>
+    <h2 class="stit aos d1">왜 GPU 가격이 <span class="hl-p">6배 이상</span> 비싸졌나?</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0">
+      <div class="card aos d1" style="text-align:center;border-color:rgba(100,116,139,.2)">
+        <div style="color:#64748b;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.9rem">30년 전</div>
+        <div style="font-size:1.9rem;font-weight:900;color:#64748b;margin-bottom:.5rem">CPU &gt; GPU</div>
+        <p style="color:#475569;font-size:.88rem">순차 명령 처리·소프트웨어 실행에 최적화<br>Hand Coding + Instructions 방식</p>
+      </div>
+      <div class="card aos d2" style="text-align:center;border-color:rgba(139,92,246,.3)">
+        <div style="color:#a78bfa;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.9rem">현재</div>
+        <div class="stat-big" style="margin-bottom:.5rem">CPU ≪≪ GPU</div>
+        <p style="color:#94a3b8;font-size:.88rem">병렬 연산·AI 학습에 최적화<br>Machine Learning + Neural Networks 방식</p>
+      </div>
+    </div>
+    <div class="aos d3" style="background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.18);border-radius:14px;padding:1.5rem;text-align:center">
+      <p style="color:#a78bfa;font-size:.9rem;font-weight:700;margin-bottom:.6rem">🔄 컴퓨팅 패러다임 전환</p>
+      <div style="display:flex;align-items:center;gap:.8rem;justify-content:center;flex-wrap:wrap;font-size:.85rem">
+        <div style="background:rgba(100,116,139,.1);border:1px solid rgba(100,116,139,.2);border-radius:10px;padding:.6rem 1.2rem;color:#64748b">Hand Coding<br><span style="font-size:.75rem">CPU · Software</span></div>
+        <span style="color:#a78bfa;font-size:1.3rem">→</span>
+        <div style="background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);border-radius:10px;padding:.6rem 1.2rem;color:#a78bfa;font-weight:700">Machine Learning<br><span style="font-size:.75rem">Neural Networks · GPU · AI</span></div>
+      </div>
+      <p style="color:#64748b;margin-top:.9rem;font-size:.88rem">Video + Text → DNN → <strong style="color:#a78bfa">ANYTHING</strong> — 생성형 컴퓨팅</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2-3 video-slide: 인간의 시대 끝이 보인다 -->
+<section id="section-7" style="padding:0">
+  <div class="vs-wrap" style="background:linear-gradient(135deg,#0d0d1e,#1e0a3d,#0a1628)">
+    <div class="vs-box aos">
+      <div class="tag tc" style="margin-bottom:.9rem">📹 영상 시청</div>
+      <h2 style="font-size:clamp(1.35rem,3vw,1.9rem);font-weight:800;color:#fff;margin-bottom:.4rem">Q. 여러분이 생각하는 로봇은 어떻습니까?</h2>
+      <p style="color:#64748b;font-size:.88rem;margin-bottom:.5rem">오픈 AI + 스타트업 로봇업체 — <span style="color:#06b6d4">"인간의 시대 끝이 보인다"</span></p>
+      <div class="vpa" id="vp1"><div class="vph"><div style="font-size:3rem;margin-bottom:.8rem">▶</div><p style="font-size:.88rem">영상 파일을 선택해 로드하세요</p></div></div>
+      <label class="vub" for="vf1">📂 영상 파일 선택</label>
+      <input type="file" id="vf1" accept="video/*" style="display:none">
+    </div>
+  </div>
+</section>
+
+<!-- 2-4 think-corner-slide -->
+<section id="section-8" style="padding:0">
+  <div class="think-wrap">
+    <div class="think-box">
+      <div style="font-size:3.8rem;margin-bottom:.9rem">💡</div>
+      <div class="tag ta aos" style="margin-bottom:1.4rem">토의 코너</div>
+      <h2 class="aos d1" style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:1.4rem">"여러분"<br>어떻게 생각하시나요?</h2>
+      <div class="aos d2" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.22);border-radius:16px;padding:1.8rem;margin-bottom:1.2rem">
+        <p style="font-size:1.05rem;color:#fde68a;line-height:1.85;font-weight:500">AI가 인간을 대체한다고 생각하시나요?<br>아니면 인간과 AI가 협업하는 새로운 형태가 될까요?</p>
+      </div>
+      <p class="aos d3" style="color:#92400e;font-size:.88rem">지금까지 배운 Agentic AI를 떠올리며 자유롭게 나눠보세요</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 3: Physical AI 진화
+     ══════════════════════════════════════ -->
+<section id="section-9" style="background:linear-gradient(160deg,#051510,#0a2818);padding:0">
+  <div class="ch-hero">
+    <div>
+      <div class="tag tg aos">CHAPTER 03</div>
+      <h2 class="stit aos d1">Physical AI<br><span class="hl-g">진화의 4단계</span></h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">2012년 AlexNet부터 자율주행과 범용 로보틱스까지. Jensen Huang이 제시한 4단계 AI 발전 경로와 5단계 기술 전환점을 살펴봅니다.</p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc3"></div>
+  </div>
+</section>
+
+<!-- 3-2 Physical AI 4단계 -->
+<section id="section-10" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tg aos">4단계 진화</div>
+    <h2 class="stit aos d1">Jensen Huang이 제시한 <span class="hl-g">4단계 AI 진화</span></h2>
+    <p class="ssub aos d2">Perception AI → Generative AI → Agentic AI → Physical AI</p>
+    <div class="g2">
+      <div class="card aos d1" style="border-left:3px solid #64748b"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(100,116,139,.2);color:#94a3b8">1</div><h3 style="color:#94a3b8;font-size:.95rem">Perception AI (2012~)</h3></div><p style="color:#64748b;font-size:.87rem;line-height:1.7">AlexNet 출발. 음성인식, 딥 추천, 의료 영상 분석 등 인식·분류 중심</p></div>
+      <div class="card aos d2" style="border-left:3px solid #a78bfa"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(139,92,246,.2);color:#a78bfa">2</div><h3 style="color:#a78bfa;font-size:.95rem">Generative AI</h3></div><p style="color:#94a3b8;font-size:.87rem;line-height:1.7">디지털 마케팅, 콘텐츠 창작. 텍스트·이미지·영상 생성. ChatGPT, DALL-E의 시대</p></div>
+      <div class="card aos d3" style="border-left:3px solid #06b6d4"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(6,182,212,.2);color:#06b6d4">3</div><h3 style="color:#06b6d4;font-size:.95rem">Agentic AI ← 지금!</h3></div><p style="color:#e2e8f0;font-size:.87rem;line-height:1.7">코딩 어시스턴트, 고객 서비스, 환자 케어. 다단계 작업 자율 완수</p></div>
+      <div class="card aos d4" style="border-left:3px solid #10b981"><div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(16,185,129,.2);color:#10b981">4</div><h3 style="color:#10b981;font-size:.95rem">Physical AI → 미래!</h3></div><p style="color:#e2e8f0;font-size:.87rem;line-height:1.7">자율주행차, 범용 로보틱스. 물리 세계와 상호작용하며 실제 환경에서 행동</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3-3 Physical AI 전환점 표 + 타임라인 -->
+<section id="section-11" style="background:linear-gradient(135deg,#050d10,#07160a);padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tg aos">5단계 전환점</div>
+    <h2 class="stit aos d1">Physical AI <span class="hl-g">기술 전환점</span></h2>
+    <div class="aos d2" style="overflow-x:auto;margin-bottom:2.5rem">
+      <table class="st">
+        <thead><tr><th>구분</th><th>핵심 변화</th><th>기술적 전환점</th></tr></thead>
+        <tbody>
+          <tr><td style="color:#06b6d4">① LLM 시대</td><td>언어 추론 중심, 거대 서버급 모델</td><td>GPT-3/4, Gemini, Claude</td></tr>
+          <tr><td style="color:#a78bfa">② LMM 시대</td><td>경량화, 엣지·온디바이스 대응</td><td>Phi-3, Mistral, Gemma</td></tr>
+          <tr><td style="color:#10b981">③ VLA 시대</td><td>Vision+Language+Action 통합, 로봇 적용</td><td>ALOHA, SmolVLA, ACT</td></tr>
+          <tr><td style="color:#f59e0b">④ 월드모델 시대</td><td>세상 시뮬레이션·예측 기반 계획</td><td>Dreamer, WorldDreamer, RoboDreamer</td></tr>
+          <tr><td style="color:#f87171">⑤ 통합 루프</td><td>월드모델(상상) + VLA(행동) 결합</td><td>지능형 로봇 완성 구조</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tl aos d2">
+      <div class="tli"><div class="tld" style="border-color:#64748b"></div><div style="display:flex;gap:1rem;flex-wrap:wrap"><div style="min-width:110px;color:#64748b;font-size:.8rem;font-weight:700">2018~2022</div><p style="color:#94a3b8;font-size:.88rem;line-height:1.7">거대 LLM — GPT-3/4, Gemini, Claude. 100B↑ 파라미터, 언어추론·대화·지식, 텍스트 중심</p></div></div>
+      <div class="tli"><div class="tld" style="border-color:#a78bfa"></div><div style="display:flex;gap:1rem;flex-wrap:wrap"><div style="min-width:110px;color:#a78bfa;font-size:.8rem;font-weight:700">2023~2024</div><p style="color:#94a3b8;font-size:.88rem;line-height:1.7">경량 LMM — Phi-3, Mistral, Gemma. 임베디드·로컬 실행 가능, 멀티모달 확장 용이</p></div></div>
+      <div class="tli"><div class="tld" style="border-color:#10b981"></div><div style="display:flex;gap:1rem;flex-wrap:wrap"><div style="min-width:110px;color:#10b981;font-size:.8rem;font-weight:700">2024~2025</div><p style="color:#94a3b8;font-size:.88rem;line-height:1.7">VLA — ALOHA, SmolVLA, ACT+VLM. 비전+언어+행동 통합, 20~50Hz 실시간 제어 Loop</p></div></div>
+      <div class="tli"><div class="tld" style="border-color:#f59e0b"></div><div style="display:flex;gap:1rem;flex-wrap:wrap"><div style="min-width:110px;color:#f59e0b;font-size:.8rem;font-weight:700">2025~</div><p style="color:#94a3b8;font-size:.88rem;line-height:1.7">월드모델 — Dreamer, WorldDreamer, RoboDreamer. 세상 동역학 학습, 잠재공간 시뮬레이션, 계획(MPC)+예측</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3-4 video-slide: 미래에는 움직이는 모든 것이 로봇이 된다 -->
+<section id="section-12" style="padding:0">
+  <div class="vs-wrap" style="background:linear-gradient(135deg,#001a10,#031a00,#00150a)">
+    <div class="vs-box aos" style="border-color:rgba(16,185,129,.25)">
+      <div class="tag tg" style="margin-bottom:.9rem">📹 영상 시청</div>
+      <h2 style="font-size:clamp(1.35rem,3vw,1.9rem);font-weight:800;color:#fff;margin-bottom:.4rem">Q. 앞으로 미래는 Physical AI인가요?</h2>
+      <p style="color:#64748b;font-size:.88rem;margin-bottom:.5rem"><span style="color:#10b981">"미래에는 움직이는 모든 것이 로봇이 된다"</span></p>
+      <div class="vpa" id="vp2"><div class="vph"><div style="font-size:3rem;margin-bottom:.8rem">▶</div><p style="font-size:.88rem">영상 파일을 선택해 로드하세요</p></div></div>
+      <label class="vub" style="border-color:rgba(16,185,129,.45);color:#10b981" for="vf2">📂 영상 파일 선택</label>
+      <input type="file" id="vf2" accept="video/*" style="display:none">
+    </div>
+  </div>
+</section>
+
+<!-- 3-5 미래 로봇 -->
+<section id="section-13" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tg aos">미래 로봇</div>
+    <h2 class="stit aos d1">미래 로봇은 어떻게 <span class="hl-g">변할까요?</span></h2>
+    <p class="ssub aos d2">ASIMO → Tesla Optimus, Figure, Unitree</p>
+    <div class="g3">
+      <div class="card aos d1"><div style="font-size:1.8rem;margin-bottom:.8rem">🏍️</div><h3 style="color:#94a3b8;font-size:.93rem;margin-bottom:.4rem">ASIMO (2015년)</h3><p style="color:#64748b;font-size:.85rem;line-height:1.7">세계 최초 2족 보행 로봇. 하드코딩 방식 제어. Physical AI 이전 시대의 상징</p><div class="tag tc" style="margin-top:.9rem;font-size:.68rem">Traditional Control</div></div>
+      <div class="card aos d2" style="border-color:rgba(6,182,212,.22)"><div style="font-size:1.8rem;margin-bottom:.8rem">⚡</div><h3 style="color:#e2e8f0;font-size:.93rem;margin-bottom:.4rem">Tesla Optimus</h3><p style="color:#94a3b8;font-size:.85rem;line-height:1.7">AI 기반 범용 휴머노이드. VLA 적용으로 다양한 가정·공장 작업 수행. 대량 생산 목표</p><div class="tag tc" style="margin-top:.9rem;font-size:.68rem">VLA Control</div></div>
+      <div class="card aos d3" style="border-color:rgba(139,92,246,.22)"><div style="font-size:1.8rem;margin-bottom:.8rem">🤖</div><h3 style="color:#e2e8f0;font-size:.93rem;margin-bottom:.4rem">Figure / Unitree</h3><p style="color:#94a3b8;font-size:.85rem;line-height:1.7">오픈 AI 협업으로 자연어 지시→행동 실현. Unitree는 저비용 고성능으로 대중화 선도</p><div class="tag tp" style="margin-top:.9rem;font-size:.68rem">AI-Native Robot</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 4: VLA·로봇 AI
+     ══════════════════════════════════════ -->
+<section id="section-14" style="background:linear-gradient(160deg,#140a00,#281400);padding:0">
+  <div class="ch-hero">
+    <div>
+      <div class="tag ta aos">CHAPTER 04</div>
+      <h2 class="stit aos d1">VLA와<br><span class="hl-a">로봇 AI의 실현</span></h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">Vision-Language-Action 모델이 로봇에게 눈과 언어와 행동을 동시에 부여합니다. 로봇 파운데이션 모델로 가는 길을 살펴봅니다.</p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc4"></div>
+  </div>
+</section>
+
+<!-- 4-2 VLA 개념 -->
+<section id="section-15" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag ta aos">VLA 핵심 개념</div>
+    <h2 class="stit aos d1">VLA: <span class="hl-a">Vision · Language · Action</span></h2>
+    <p class="ssub aos d2">인터넷 규모 데이터로 학습한 VLM의 일반화 능력을 활용해 로봇의 저수준 동작(low-level actions)을 예측</p>
+    <div class="g3" style="margin-bottom:2rem">
+      <div class="card aos d1" style="text-align:center;border-color:rgba(6,182,212,.25)"><div style="font-size:2.8rem;margin-bottom:.8rem">👁️</div><h3 style="color:#06b6d4;font-size:.95rem;margin-bottom:.4rem">VISION (시각)</h3><p style="color:#94a3b8;font-size:.85rem;line-height:1.7">카메라를 통해 세상을 봅니다. 이미지·영상·센서 데이터를 토큰으로 인코딩</p></div>
+      <div class="card aos d2" style="text-align:center;border-color:rgba(245,158,11,.25)"><div style="font-size:2.8rem;margin-bottom:.8rem">💬</div><h3 style="color:#f59e0b;font-size:.95rem;margin-bottom:.4rem">LANGUAGE (언어)</h3><p style="color:#94a3b8;font-size:.85rem;line-height:1.7">사람의 명령을 이해합니다. "노란 통에 물건을 집어 넣어라" 등 자연어 지시</p></div>
+      <div class="card aos d3" style="text-align:center;border-color:rgba(139,92,246,.25)"><div style="font-size:2.8rem;margin-bottom:.8rem">🦾</div><h3 style="color:#a78bfa;font-size:.95rem;margin-bottom:.4rem">ACTION (행동)</h3><p style="color:#94a3b8;font-size:.85rem;line-height:1.7">물리적 임무를 수행합니다. 모터 제어 신호(관절 위치·속도·EEF 포즈) 출력</p></div>
+    </div>
+    <div class="aos d4" style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:14px;padding:1.6rem">
+      <h3 style="color:#f59e0b;font-size:.95rem;margin-bottom:.9rem">🔗 VLA 아키텍처 흐름</h3>
+      <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;justify-content:center;font-size:.82rem">
+        <div style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);border-radius:8px;padding:.45rem .9rem;color:#06b6d4">이미지 관찰</div>
+        <span style="color:#64748b">+</span>
+        <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:.45rem .9rem;color:#f59e0b">언어 지시</div>
+        <span style="color:#64748b">+</span>
+        <div style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);border-radius:8px;padding:.45rem .9rem;color:#a78bfa">로봇 상태</div>
+        <span style="color:#64748b">→</span>
+        <div style="background:rgba(6,182,212,.14);border:1px solid rgba(6,182,212,.3);border-radius:8px;padding:.45rem .9rem;color:#fff;font-weight:700">VLM (System 2)</div>
+        <span style="color:#64748b">→</span>
+        <div style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:.45rem .9rem;color:#10b981">Diffusion Transformer (System 1)</div>
+        <span style="color:#64748b">→</span>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);border-radius:8px;padding:.45rem .9rem;color:#f59e0b;font-weight:700">모터 액션</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4-3 RFM & World Foundation Model -->
+<section id="section-16" style="background:linear-gradient(135deg,#0e0800,#1e1400);padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag ta aos">로봇 파운데이션 모델</div>
+    <h2 class="stit aos d1">Robot Foundation Model &<br><span class="hl-a">World Foundation Model</span></h2>
+    <div class="g2">
+      <div class="card aos d1" style="border-color:rgba(245,158,11,.25)">
+        <h3 style="color:#f59e0b;margin-bottom:.9rem">🤖 RFM (Robot Foundation Model)</h3>
+        <p style="color:#94a3b8;font-size:.88rem;line-height:1.75;margin-bottom:1rem">어떤 로봇이든, 어떤 작업이든 수행할 수 있도록 다양한 환경·센서·action 데이터를 대규모로 사전학습한 범용 로봇 지능 모델. VLA가 나아가야 할 방향</p>
+        <div style="background:rgba(245,158,11,.06);border-radius:8px;padding:1rem;font-size:.84rem;color:#fde68a;line-height:1.75">LLM은 SFT로 '공부'하고 RLVR로 '연습'하면서 진짜 똑똑해졌다.<br>VLA도 '보고 따라 하고' 점점 모든 로봇이 쓰는 큰 두뇌가 된다.</div>
+      </div>
+      <div class="card aos d2" style="border-color:rgba(167,139,250,.25)">
+        <h3 style="color:#a78bfa;margin-bottom:.9rem">🌍 World Foundation Model</h3>
+        <p style="color:#94a3b8;font-size:.88rem;line-height:1.75;margin-bottom:1rem">LLM처럼, 로봇·자율주행차 등 실제 물리환경과 상호작용하는 세계 기반 모델(WFM). 다음 세대 AI의 핵심</p>
+        <ul style="color:#94a3b8;list-style:none;padding:0;font-size:.88rem;line-height:2">
+          <li>🔵 Embodied Agent가 가상 시뮬레이션(rollout) 수행</li>
+          <li>🟢 효율적인 action 탐색 → 강화학습(RL) 활용</li>
+          <li>🟡 모방학습(IL)만으로 어려운 일반화 문제 극복</li>
+          <li>🔴 상위: 사고 / 하위: 행동 이중 구조</li>
+        </ul>
+      </div>
+    </div>
+    <div class="aos d3" style="margin-top:1.4rem;background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.2);border-radius:14px;padding:1.4rem;text-align:center">
+      <p style="color:#e2e8f0;font-size:.95rem;line-height:1.7">이미지 토큰 + 텍스트 토큰 → <strong style="color:#a78bfa">World Foundation Model</strong> → <strong style="color:#f59e0b">Action Tokens</strong> → 🤖 로봇 실행</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4-4 think-corner-slide 2 -->
+<section id="section-17" style="padding:0">
+  <div class="think-wrap" style="background:linear-gradient(135deg,#1a1200 0%,#1a0a0a 50%,#1a1200 100%)">
+    <div class="think-box">
+      <div style="font-size:3.8rem;margin-bottom:.9rem">💡</div>
+      <div class="tag ta aos" style="margin-bottom:1.4rem">토의 코너</div>
+      <h2 class="aos d1" style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:1.4rem">"여러분"<br>어떻게 생각하시나요?</h2>
+      <div class="aos d2" style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.22);border-radius:16px;padding:1.8rem;margin-bottom:1.2rem">
+        <p style="font-size:1.05rem;color:#fde68a;line-height:1.85;font-weight:500">앞으로 우리는 어떤 존재로 남게 될까요?<br>AI와 로봇이 모든 것을 대체하는 세상에서<br>인간의 고유한 역할은 무엇일까요?</p>
+      </div>
+      <p class="aos d3" style="color:#92400e;font-size:.88rem">World Foundation Model과 로봇의 미래를 보면서 느끼는 점을 자유롭게 나눠보세요</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 5: 스케일링 법칙
+     ══════════════════════════════════════ -->
+<section id="section-18" style="background:linear-gradient(160deg,#150010,#250820);padding:0">
+  <div class="ch-hero">
+    <div>
+      <div class="tag tr aos">CHAPTER 05</div>
+      <h2 class="stit aos d1">스케일링 법칙:<br><span class="hl-r">하나에서 셋으로</span></h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">Pre-training, Post-training, Test-time Scaling — AI 지능을 높이는 세 가지 방법을 이해하면 왜 추론형 AI가 혁신인지 알 수 있습니다.</p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc5"></div>
+  </div>
+</section>
+
+<!-- 5-2 스케일링 3법칙 -->
+<section id="section-19" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tr aos">3가지 스케일링</div>
+    <h2 class="stit aos d1">From One to <span class="hl-r">Three Scaling Laws</span></h2>
+    <p class="ssub aos d2">컴퓨팅(Compute)을 늘릴수록 AI 지능(Intelligence)이 올라가는 세 가지 방법</p>
+    <div class="g3">
+      <div class="card aos d1" style="border-top:3px solid #64748b">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(100,116,139,.2);color:#94a3b8">1</div><h3 style="color:#94a3b8;font-size:.93rem">Pre-Training Scaling</h3></div>
+        <p style="color:#64748b;font-size:.85rem;line-height:1.7;margin-bottom:.9rem">사전학습 스케일링 — "기초 체력 키우기"<br>모델 처음 키울 때, 데이터·파라미터·컴퓨트 확장</p>
+        <div style="background:rgba(100,116,139,.08);border-radius:8px;padding:.9rem;font-size:.82rem;color:#94a3b8;line-height:1.7">✅ 폭넓은 상식·언어 능력, 전천후 기초력 상승<br>⚠️ 비용 급증, 도메인 특화·정밀 추론 한계</div>
+      </div>
+      <div class="card aos d2" style="border-top:3px solid #06b6d4">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(6,182,212,.2);color:#06b6d4">2</div><h3 style="color:#06b6d4;font-size:.93rem">Post-Training Scaling</h3></div>
+        <p style="color:#94a3b8;font-size:.85rem;line-height:1.7;margin-bottom:.9rem">사후학습 스케일링 — "코치와 스파링"<br>사전학습 이후 SFT, RLHF/RLAIF로 마무리 손질</p>
+        <div style="background:rgba(6,182,212,.06);border-radius:8px;padding:.9rem;font-size:.82rem;color:#94a3b8;line-height:1.7">✅ 말투·안전성·정확성·도메인 성능 향상<br>⚠️ 과적합/편향 위험, 데이터 품질 의존</div>
+      </div>
+      <div class="card aos d3" style="border-top:3px solid #a78bfa">
+        <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem"><div class="sb" style="background:rgba(139,92,246,.2);color:#a78bfa">3</div><h3 style="color:#a78bfa;font-size:.93rem">Test-Time Scaling ✨</h3></div>
+        <p style="color:#94a3b8;font-size:.85rem;line-height:1.7;margin-bottom:.9rem">추론 시 스케일링 — "시험장에서 더 오래 생각하기"<br>가중치 변경 없이 여러 경로 탐색·자기검증</p>
+        <div style="background:rgba(139,92,246,.06);border-radius:8px;padding:.9rem;font-size:.82rem;color:#e2e8f0;line-height:1.7">✅ 사실성↑, 복잡 문제 해결력↑, 근거 제시<br>⚠️ 응답 지연/비용 증가, 에이전트 오케스트레이션 필요</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5-3 Test-Time Scaling 기법 + 상황별 추천 -->
+<section id="section-20" style="background:linear-gradient(135deg,#0e0520,#18082e);padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag tp aos">Test-Time 심화</div>
+    <h2 class="stit aos d1">추론 시 스케일링<br><span class="hl-p">"Reasoning"</span>이 핵심인 이유</h2>
+    <div class="g2">
+      <div class="aos d1">
+        <h3 style="color:#a78bfa;margin-bottom:1.1rem;font-size:.95rem">🔧 대표 기법</h3>
+        <div class="tl">
+          <div class="tli" style="background:rgba(139,92,246,.05)"><div class="tld" style="border-color:#a78bfa"></div><strong style="color:#a78bfa">Self-Consistency</strong> <span style="color:#94a3b8;font-size:.84rem">— 다중 샘플→투표</span></div>
+          <div class="tli" style="background:rgba(139,92,246,.05)"><div class="tld" style="border-color:#a78bfa"></div><strong style="color:#a78bfa">CoT / ToT</strong> <span style="color:#94a3b8;font-size:.84rem">— 단계/트리 추론</span></div>
+          <div class="tli" style="background:rgba(139,92,246,.05)"><div class="tld" style="border-color:#a78bfa"></div><strong style="color:#a78bfa">ReAct / Reflexion</strong> <span style="color:#94a3b8;font-size:.84rem">— 생각↔행동 반복</span></div>
+          <div class="tli" style="background:rgba(139,92,246,.05)"><div class="tld" style="border-color:#a78bfa"></div><strong style="color:#a78bfa">RAG</strong> <span style="color:#94a3b8;font-size:.84rem">— 근거 검색</span></div>
+          <div class="tli" style="background:rgba(139,92,246,.05)"><div class="tld" style="border-color:#a78bfa"></div><strong style="color:#a78bfa">Tool Use</strong> <span style="color:#94a3b8;font-size:.84rem">— 계산기/SQL/검색/코드 실행</span></div>
+        </div>
+      </div>
+      <div class="aos d2">
+        <h3 style="color:#a78bfa;margin-bottom:1.1rem;font-size:.95rem">📊 상황별 추천 스케일링</h3>
+        <div style="overflow-x:auto">
+          <table class="st" style="font-size:.82rem">
+            <thead><tr><th>상황</th><th>추천</th></tr></thead>
+            <tbody>
+              <tr><td>전반적 실력 부족 (문해력·지식)</td><td style="color:#94a3b8">Pre-training</td></tr>
+              <tr><td>말투·안전·도메인 맞춤 필요</td><td style="color:#06b6d4">Post-training</td></tr>
+              <tr><td>사실성·정확 근거·최신성 중요</td><td style="color:#a78bfa">Test-time</td></tr>
+              <tr><td>지연·비용 엄격</td><td style="color:#94a3b8">Pre/Post 위주</td></tr>
+              <tr><td>고난도 추론·결정 과제</td><td style="color:#a78bfa;font-weight:800">Test-time ★</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:.9rem;margin-top:.9rem;font-size:.84rem;color:#fde68a;line-height:1.7">🎓 "시험장에서 한 번 더 확인하고, 필요하면 사전 찾아보고, 계산기 써보기" — 더 오래 생각하면 보통 정답률이 올라감</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CHAPTER 6: 글로벌 산업 영향
+     ══════════════════════════════════════ -->
+<section id="section-21" style="background:linear-gradient(160deg,#0a0520,#12083a);padding:0">
+  <div class="ch-hero">
+    <div>
+      <div class="tag ti aos">CHAPTER 06</div>
+      <h2 class="stit aos d1">글로벌 산업에<br><span class="hl-i">미치는 영향</span></h2>
+      <p class="aos d2" style="color:#94a3b8;line-height:1.8;font-size:1.02rem;max-width:500px;margin-top:.6rem">Physical AI와 로봇이 다음 산업혁명의 중심이 됩니다. 토큰 개념의 확장, RaaS 등 새로운 비즈니스 패러다임을 살펴봅니다.</p>
+    </div>
+    <div class="spot-card aos-s d2" id="sc6"></div>
+  </div>
+</section>
+
+<!-- 6-2 산업 영향 -->
+<section id="section-22" style="background:#0a0a0f;padding:5.5rem 2rem">
+  <div class="inner">
+    <div class="tag ti aos">산업 영향</div>
+    <h2 class="stit aos d1">로봇이 <span class="hl-i">산업 혁신의 중심축</span>이 된다</h2>
+    <div class="g2" style="margin-bottom:1.4rem">
+      <div class="card aos d1" style="border-color:rgba(129,140,248,.22)">
+        <h3 style="color:#818cf8;margin-bottom:.9rem;font-size:.95rem">🌐 거시 트렌드와 연결</h3>
+        <ul style="color:#94a3b8;list-style:none;padding:0;line-height:2.1;font-size:.88rem">
+          <li>• 인구 및 노동력 감소 → 로봇 수요 폭증</li>
+          <li>• 제조업 자동화 필요성 증가</li>
+          <li>• 단순 반복을 넘어 <strong style="color:#818cf8">스스로 인식·판단·행동</strong>하는 지능형 시스템으로 진화</li>
+          <li>• Physical AI = 다음 산업혁명의 중심 (Jensen Huang)</li>
+        </ul>
+      </div>
+      <div class="card aos d2" style="border-color:rgba(6,182,212,.22)">
+        <h3 style="color:#06b6d4;margin-bottom:.9rem;font-size:.95rem">🔤 토큰(Token)의 범위 확장</h3>
+        <ul style="color:#94a3b8;list-style:none;padding:0;line-height:2.1;font-size:.88rem">
+          <li>• 텍스트 토큰만이 아니라 <strong style="color:#06b6d4">이미지·영상·로봇 행동</strong>까지 토큰화</li>
+          <li>• "로봇이 할 행동을 토큰으로 예측하고 실행"</li>
+          <li>• 데이터센터/엣지 컴퓨팅 구조도 이에 맞춰 재편</li>
+          <li>• 로봇 임베디드 AI 완성 루프 구현 가능</li>
+        </ul>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="card aos d1" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:.5rem">🏭</div><h4 style="color:#e2e8f0;font-size:.88rem;margin-bottom:.4rem">물류창고·공장</h4><p style="color:#64748b;font-size:.82rem">로봇-인간 협업시스템, '세계모델+행동토큰' 구조 적용</p></div>
+      <div class="card aos d2" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:.5rem">📊</div><h4 style="color:#e2e8f0;font-size:.88rem;margin-bottom:.4rem">운영 효율화</h4><p style="color:#64748b;font-size:.82rem">물체 인식+운반+배치 시나리오를 토큰화·모델링으로 최적화</p></div>
+      <div class="card aos d3" style="text-align:center"><div style="font-size:1.8rem;margin-bottom:.5rem">💼</div><h4 style="color:#06b6d4;font-size:.88rem;margin-bottom:.4rem">RaaS 비즈니스</h4><p style="color:#64748b;font-size:.82rem">서비스형 로봇(Robot as a Service), 구독형 자동화 솔루션이 유망</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     closing-corner-slide (★ 필수)
+     ══════════════════════════════════════ -->
+<section id="section-last" style="padding:0">
+  <div class="cl-wrap" style="min-height:100vh;width:100%">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(at 30% 20%,rgba(99,102,241,.18) 0%,transparent 50%),radial-gradient(at 80% 80%,rgba(245,158,11,.12) 0%,transparent 50%)"></div>
+    <div style="position:relative;z-index:2;text-align:center;max-width:920px;padding:2rem;width:90%">
+      <div style="font-size:3.8rem;margin-bottom:.9rem">🎓</div>
+      <div class="tag ta aos" style="margin-bottom:1.4rem">강의 마무리</div>
+      <h2 class="aos d1" style="font-size:clamp(1.9rem,5vw,3.4rem);font-weight:900;color:#fff;margin-bottom:.9rem">수고하셨습니다!</h2>
+      <p class="aos d2" style="color:#94a3b8;font-size:1.05rem;margin-bottom:2.8rem;line-height:1.7">오늘 함께 살펴본 AI 진화의 핵심 정리</p>
+      <div class="g3 aos d2" style="text-align:left;margin-bottom:2.4rem">
+        <div style="background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);border-radius:16px;padding:1.4rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🧠</div><h4 style="color:#06b6d4;margin-bottom:.4rem;font-size:.92rem">Agentic AI</h4><p style="color:#64748b;font-size:.84rem;line-height:1.65">단순 생성에서 관찰→계획→행동의 연속 루프로. AI가 스스로 생각하고 행동하는 시대</p></div>
+        <div style="background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:1.4rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🤖</div><h4 style="color:#a78bfa;margin-bottom:.4rem;font-size:.92rem">Physical AI & VLA</h4><p style="color:#64748b;font-size:.84rem;line-height:1.65">시각+언어+행동이 통합된 VLA로 로봇이 자율적으로 물리 세계에서 행동</p></div>
+        <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:1.4rem"><div style="font-size:1.4rem;margin-bottom:.4rem">🌍</div><h4 style="color:#f59e0b;margin-bottom:.4rem;font-size:.92rem">산업 혁명</h4><p style="color:#64748b;font-size:.84rem;line-height:1.65">로봇이 산업 혁신의 중심축. RaaS·협업 시스템·토큰화된 행동 모델이 새로운 기회</p></div>
+      </div>
+      <div class="aos d3" style="background:rgba(255,255,255,.03);border:1px solid rgba(245,158,11,.3);border-radius:14px;padding:1.4rem;margin-bottom:1.6rem">
+        <p style="color:#f59e0b;font-size:.97rem;font-weight:700;margin-bottom:.4rem">💡 오늘의 핵심 메시지</p>
+        <p style="color:#94a3b8;font-size:.92rem;line-height:1.75">"미래에는 움직이는 모든 것이 로봇이 된다" — Jensen Huang<br>우리는 지금 AI가 디지털을 넘어 물리 세계로 확장되는 역사적 전환점에 있습니다.</p>
+      </div>
+      <p class="aos d4" style="color:#475569;font-size:.76rem">ZETABANK · 가장 혁신적인 로봇 플랫폼</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT (CSS 절대 포함 금지)
+     ══════════════════════════════════════ -->
+<script>
+/* ── 관광지 풀 (30선 샘플) ── */
+const TOURIST_SPOTS = [
+  {name:'파리 에펠탑',flag:'🇫🇷',icon:'🗼',gradient:'linear-gradient(160deg,#1a1a2e,#16213e,#c9a227)',stat:'연간 방문객 700만 명 · 세계 유료 관광지 1위',reason:'밤에 빛나는 황금빛 에펠탑 아래서 가장 낭만적인 순간'},
+  {name:'로마 콜로세움',flag:'🇮🇹',icon:'🏛️',gradient:'linear-gradient(160deg,#3d1a00,#8b4513,#d4a056)',stat:'연간 방문객 760만 명 · 세계 7대 불가사의',reason:'2,000년 역사의 원형경기장에서 고대 로마의 숨결을 느낍니다'},
+  {name:'뉴욕 맨해튼',flag:'🇺🇸',icon:'🗽',gradient:'linear-gradient(160deg,#0f2027,#203a43,#2c5364)',stat:'연간 방문객 6,600만 명 · 세계에서 가장 많이 촬영되는 스카이라인',reason:'타임스퀘어의 화려함부터 센트럴파크의 고요함까지'},
+  {name:'도쿄 시부야',flag:'🇯🇵',icon:'🌆',gradient:'linear-gradient(160deg,#0d0221,#190b45,#f72585)',stat:'연간 방문객 300만 명 · 세계 최대 스크램블 교차로',reason:'네온사인과 인파가 교차하는 현대 일본의 상징'},
+  {name:'두바이 버즈칼리파',flag:'🇦🇪',icon:'🏙️',gradient:'linear-gradient(160deg,#0a0a0a,#1a1a2e,#ffd700)',stat:'세계 최고 높이 828m · 연간 방문객 190만 명',reason:'지상 555m 전망대에서 사막과 페르시아만을 내려다봅니다'},
+  {name:'바르셀로나 사그라다파밀리아',flag:'🇪🇸',icon:'⛪',gradient:'linear-gradient(160deg,#2d0057,#6a0dad,#ff6b35)',stat:'연간 방문객 480만 명 · 가우디 작품 7개 세계유산',reason:'140년째 완공 중인 살아있는 성당의 경이로움'},
+  {name:'마추픽추',flag:'🇵🇪',icon:'🏔️',gradient:'linear-gradient(160deg,#1a3a1a,#2d6a2d,#7ec850)',stat:'연간 방문객 100만 명 · 세계 7대 불가사의',reason:'안데스 구름 위에 숨겨진 잉카 공중도시의 신비'},
+  {name:'이스탄불 성 소피아',flag:'🇹🇷',icon:'🕌',gradient:'linear-gradient(160deg,#1a0a2e,#4a2068,#c9a227)',stat:'연간 방문객 370만 명 · 동서 문명의 교차점',reason:'비잔틴 모자이크와 이슬람 서예가 공존하는 역사의 현장'},
+  {name:'시드니 오페라하우스',flag:'🇦🇺',icon:'🎭',gradient:'linear-gradient(160deg,#004e8c,#0077cc,#00c9ff)',stat:'연간 방문객 1,100만 명 · 유네스코 세계유산',reason:'항구를 배경으로 조개껍데기 형상의 건축미와 세계 최고 공연'},
+  {name:'케이프타운 테이블마운틴',flag:'🇿🇦',icon:'🌄',gradient:'linear-gradient(160deg,#1a1a00,#4d3800,#ff8c00)',stat:'연간 방문객 430만 명 · 두 대양이 만나는 지점',reason:'대서양과 인도양이 만나는 지점을 바라보는 특별한 감동'},
+  {name:'그랜드캐니언',flag:'🇺🇸',icon:'🏜️',gradient:'linear-gradient(160deg,#2d0a00,#7a2200,#cc6633)',stat:'연간 방문객 600만 명 · 깊이 1.6km · 미국 자연의 상징',reason:'지구 45억 년의 역사가 눈앞에 펼쳐지는 압도감'},
+  {name:'이집트 기자 피라미드',flag:'🇪🇬',icon:'🏜️',gradient:'linear-gradient(160deg,#1a0a00,#8b6914,#f5d78e)',stat:'연간 방문객 1,500만 명 · 유일한 현존 7대 불가사의',reason:'4,500년 전 인류가 남긴 완벽한 기하학 구조물'},
+  {name:'런던 빅벤',flag:'🇬🇧',icon:'🕰️',gradient:'linear-gradient(160deg,#2c2c54,#474787,#aaa69d)',stat:'런던 연간 방문객 3,200만 명 · 세계에서 가장 유명한 시계탑',reason:'템스강변 야경 속 웨스트민스터 차임 소리'},
+  {name:'프라하 구시가지',flag:'🇨🇿',icon:'🏰',gradient:'linear-gradient(160deg,#1a0a2e,#3d1a5e,#e8c07d)',stat:'연간 방문객 800만 명 · 가장 잘 보존된 중세 도시',reason:'황금빛 천문시계와 카를교 야경의 중세 동화'},
+  {name:'하와이 와이키키',flag:'🇺🇸',icon:'🌺',gradient:'linear-gradient(160deg,#001a33,#004488,#0099ff)',stat:'연간 방문객 1,000만 명 · 연평균 27°C',reason:'화산이 만든 열대 섬에서 서핑과 훌라의 진정한 낙원'},
+  {name:'부다페스트 야경',flag:'🇭🇺',icon:'🌃',gradient:'linear-gradient(160deg,#0a0a2e,#1a1a5e,#c9a227)',stat:'연간 방문객 430만 명 · 다뉴브강 야경 세계문화유산',reason:'체인교에서 바라보는 황금빛 국회의사당 야경'},
+  {name:'베네치아 운하',flag:'🇮🇹',icon:'⛵',gradient:'linear-gradient(160deg,#001a4d,#003380,#4db8ff)',stat:'연간 방문객 2,500만 명 · 세계 유일 수상도시',reason:'곤돌라를 타고 미로같은 운하를 흘러가는 중세의 낭만'},
+  {name:'요르단 페트라',flag:'🇯🇴',icon:'🏛️',gradient:'linear-gradient(160deg,#2d0a00,#8b2200,#cc6633)',stat:'연간 방문객 100만 명 · 세계 7대 불가사의 · 인디아나존스 배경',reason:'장밋빛 사암 절벽을 조각해 만든 신전의 경이로움'},
+  {name:'아이슬란드 오로라',flag:'🇮🇸',icon:'🌌',gradient:'linear-gradient(160deg,#000a1a,#001a33,#00cc66)',stat:'연간 방문객 220만 명 · 오로라 최다 관측국',reason:'지구상 가장 극적인 자연경관, 초록빛 하늘의 춤'},
+  {name:'쿄토 아라시야마',flag:'🇯🇵',icon:'🎋',gradient:'linear-gradient(160deg,#0a1a0a,#1a3a1a,#7cb87c)',stat:'연간 방문객 300만 명 · 일본 전통의 보고',reason:'대나무 숲과 사찰이 어우러진 일본 미의 정수'},
+  {name:'싱가포르 마리나베이샌즈',flag:'🇸🇬',icon:'🏊',gradient:'linear-gradient(160deg,#001a2e,#003366,#00b4d8)',stat:'연간 방문객 400만 명 · 아시아 랜드마크',reason:'57층 인피니티풀에서 내려다보는 싱가포르의 야경'},
+  {name:'모로코 마라케시',flag:'🇲🇦',icon:'🕌',gradient:'linear-gradient(160deg,#1a0500,#660d00,#cc4400)',stat:'연간 방문객 300만 명 · 천일야화의 배경',reason:'향신료 향기와 전통 북소리가 가득한 아라비안나이트'},
+  {name:'라스베이거스 스트립',flag:'🇺🇸',icon:'🎰',gradient:'linear-gradient(160deg,#0a0000,#2d0000,#ff3300)',stat:'연간 방문객 4,000만 명 · 사막 속 최대 엔터테인먼트 도시',reason:'사막 속 밤을 낮으로 만드는 네온 불빛의 쇼'},
+  {name:'리우 예수상',flag:'🇧🇷',icon:'✝️',gradient:'linear-gradient(160deg,#003300,#006600,#00cc44)',stat:'연간 방문객 190만 명 · 세계 7대 불가사의',reason:'코르코바도 산에서 리우 전경을 품는 그리스도상'},
+  {name:'오사카 도톤보리',flag:'🇯🇵',icon:'🦀',gradient:'linear-gradient(160deg,#1a0a00,#4d1a00,#ff6600)',stat:'연간 방문객 1,200만 명 · 음식 밀도 세계 최고 거리',reason:'네온 간판과 타코야키 향기로 가득한 오사카의 활력'},
+  {name:'암스테르담 운하',flag:'🇳🇱',icon:'🚲',gradient:'linear-gradient(160deg,#003333,#006666,#00cccc)',stat:'연간 방문객 2,000만 명 · 유네스코 세계유산 운하 지구',reason:'자전거와 튤립 향기 가득한 운하 골목의 동화'},
+  {name:'빈 쇤브룬 궁전',flag:'🇦🇹',icon:'🎻',gradient:'linear-gradient(160deg,#1a1a00,#4d4d00,#d4af37)',stat:'연간 방문객 390만 명 · 합스부르크 제국의 심장',reason:'모차르트와 베토벤이 연주했던 황금빛 궁전'},
+  {name:'갈라파고스 제도',flag:'🇪🇨',icon:'🦎',gradient:'linear-gradient(160deg,#001a33,#003366,#0066aa)',stat:'연간 방문객 27만 명 · 다윈 진화론의 발상지',reason:'이구아나·펭귄과 1m 거리에서 공존하는 진화의 섬'},
+  {name:'나이아가라 폭포',flag:'🇨🇦',icon:'💧',gradient:'linear-gradient(160deg,#003366,#006994,#00b4d8)',stat:'연간 방문객 3,000만 명 · 북미 최대 폭포',reason:'초당 170만 리터가 쏟아지는 자연의 압도적인 힘'},
+  {name:'베를린 브란덴부르크',flag:'🇩🇪',icon:'🕊️',gradient:'linear-gradient(160deg,#0a0a0a,#1a1a1a,#ccaa00)',stat:'베를린 연간 방문객 1,200만 명 · 냉전 역사의 상징',reason:'장벽이 무너진 자리에서 역사의 전환점을 느낍니다'}
+];
+
+/* Fisher-Yates 셔플 */
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+const shuffled=shuffle(TOURIST_SPOTS);
+
+/* spot-card 빌드 */
+function buildSpot(elId,idx){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  const s=shuffled[idx%shuffled.length];
+  el.style.background=s.gradient;
+  el.innerHTML=
+    '<div class="sce">'+s.icon+'</div>'+
+    '<div class="sci">'+
+      '<div class="sf">'+s.flag+'</div>'+
+      '<div class="sn">'+s.name+'</div>'+
+      '<div class="sd"></div>'+
+      '<div class="ss">'+s.stat+'</div>'+
+      '<div class="sr">'+s.reason+'</div>'+
+    '</div>';
+}
+buildSpot('sc1',0);
+buildSpot('sc2',1);
+buildSpot('sc3',2);
+buildSpot('sc4',3);
+buildSpot('sc5',4);
+buildSpot('sc6',5);
+
+/* ── 네비게이션: data-target 방식 (★ scrollTo 충돌 없음) ── */
+document.querySelectorAll('.nav-item[data-target]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    const target=document.getElementById(btn.dataset.target);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+/* TOC 패널 */
+document.getElementById('toc-btn').addEventListener('click',function(){
+  const p=document.getElementById('toc-panel');
+  p.style.display=p.style.display==='block'?'none':'block';
+});
+document.querySelectorAll('#toc-panel [data-jump]').forEach(function(a){
+  a.addEventListener('click',function(){
+    const target=document.getElementById(a.dataset.jump);
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('toc-panel').style.display='none';
+  });
+});
+
+/* ── 챕터 범위 정의 (IntersectionObserver 메뉴 활성화용) ── */
+const chapters=[
+  {target:'section-0',  ids:['section-0']},
+  {target:'section-1',  ids:['section-1','section-2','section-3','section-4']},
+  {target:'section-5',  ids:['section-5','section-6','section-7','section-8']},
+  {target:'section-9',  ids:['section-9','section-10','section-11','section-12','section-13']},
+  {target:'section-14', ids:['section-14','section-15','section-16','section-17']},
+  {target:'section-18', ids:['section-18','section-19','section-20']},
+  {target:'section-21', ids:['section-21','section-22','section-last']}
+];
+const navObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(!entry.isIntersecting)return;
+    const ch=chapters.find(function(c){return c.ids.includes(entry.target.id);});
+    if(!ch)return;
+    document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+    const active=document.querySelector('.nav-item[data-target="'+ch.target+'"]');
+    if(active){
+      active.classList.add('active');
+      active.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    }
+  });
+},{threshold:0.4});
+document.querySelectorAll('section[id]').forEach(function(s){navObs.observe(s);});
+
+/* ── 스크롤 진행바 ── */
+window.addEventListener('scroll',function(){
+  const h=document.body.scrollHeight-window.innerHeight;
+  if(h>0) document.getElementById('pb').style.width=(window.scrollY/h*100)+'%';
+});
+
+/* ── AOS IntersectionObserver ── */
+const aosObs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      aosObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.aos,.aos-l,.aos-s').forEach(function(el){aosObs.observe(el);});
+
+/* ── 비디오 로드 ── */
+document.getElementById('vf1').addEventListener('change',function(){
+  loadVideo(this,'vp1');
+});
+document.getElementById('vf2').addEventListener('change',function(){
+  loadVideo(this,'vp2');
+});
+function loadVideo(input,playerId){
+  const file=input.files[0];
+  if(!file)return;
+  const url=URL.createObjectURL(file);
+  const pa=document.getElementById(playerId);
+  pa.innerHTML='<video controls autoplay style="width:100%;height:100%;object-fit:contain;border-radius:12px"><source src="'+url+'" type="'+file.type+'">브라우저가 비디오를 지원하지 않습니다.</video>';
+}
+
+/* ── 리모콘/키보드 네비게이션 ── */
+(function(){
+  function getSections(){return Array.from(document.querySelectorAll('section[id]'));}
+  function getCurrentIndex(sections){
+    const navH=(document.getElementById('top-nav')||{offsetHeight:54}).offsetHeight||54;
+    const viewMid=navH+(window.innerHeight-navH)/2;
+    let best=0;
+    for(let i=0;i<sections.length;i++){
+      const r=sections[i].getBoundingClientRect();
+      if(r.top<=viewMid) best=i;
+      else break;
+    }
+    return best;
+  }
+  let lock=false;
+  function go(delta){
+    if(lock)return;
+    const ss=getSections();
+    const idx=getCurrentIndex(ss);
+    const next=Math.max(0,Math.min(ss.length-1,idx+delta));
+    if(next===idx&&delta!==0)return;
+    lock=true;
+    ss[next].scrollIntoView({behavior:'smooth',block:'start'});
+    setTimeout(function(){lock=false;},1200);
+  }
+  document.addEventListener('keydown',function(e){
+    if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
+    switch(e.key){
+      case'ArrowRight':case'ArrowDown':case'PageDown':e.preventDefault();go(1);break;
+      case'ArrowLeft':case'ArrowUp':case'PageUp':e.preventDefault();go(-1);break;
+      case' ':e.preventDefault();go(e.shiftKey?-1:1);break;
+      case'Home':e.preventDefault();go(-9999);break;
+      case'End':e.preventDefault();go(9999);break;
+    }
+  });
+})();
+</script>
+</body>
+</html>
