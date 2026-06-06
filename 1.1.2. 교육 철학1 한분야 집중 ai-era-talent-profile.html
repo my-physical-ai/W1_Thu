@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 시대의 인재상 — 한 분야만 파면 구조조정 대상이다</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-primary: #047857;
+  --color-primary-light: #D1FAE5;
+  --color-primary-dark: #064E3B;
+  --color-emerald: #10B981;
+  --color-amber: #F59E0B;
+  --color-amber-light: #FEF3C7;
+  --color-amber-dark: #B45309;
+  --color-danger: #DC2626;
+  --color-danger-light: #FEE2E2;
+  --color-danger-dark: #991B1B;
+  --color-navy: #0F172A;
+  --color-navy-light: #1E293B;
+  --color-cyan: #06B6D4;
+  --color-cyan-light: #ECFEFF;
+  --color-purple: #7C3AED;
+  --color-purple-light: #EDE9FE;
+  --color-surface: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-text: #1E293B;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--color-text);
+  background: var(--color-surface);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+.container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4rem 0; }
+
+/* === HERO === */
+.hero {
+  background:
+    linear-gradient(135deg, #064E3B 0%, #047857 55%, #065F46 100%);
+  color: white;
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 20%, rgba(245,158,11,0.18) 0%, transparent 45%),
+    radial-gradient(circle at 75% 80%, rgba(16,185,129,0.25) 0%, transparent 50%);
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(252,211,77,0.15);
+  border: 1px solid rgba(252,211,77,0.4);
+  color: #FCD34D;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 .strike {
+  position: relative;
+  display: inline-block;
+}
+.hero h1 .strike::after {
+  content: '';
+  position: absolute;
+  left: -4px; right: -4px;
+  top: 50%;
+  height: 5px;
+  background: #FCA5A5;
+  transform: rotate(-3deg);
+  opacity: 0.85;
+}
+.hero h1 .accent {
+  background: linear-gradient(90deg, #FCD34D 0%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.65;
+  opacity: 0.95;
+  max-width: 780px;
+  margin-bottom: 2rem;
+}
+.hero-quote {
+  display: inline-block;
+  border-left: 4px solid #FCD34D;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255,255,255,0.08);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 760px;
+}
+.hero-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  opacity: 0.78;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.hero-meta-item::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #FCD34D;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* === SECTION HEADER === */
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-eyebrow {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  padding: 0.35rem 1rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 1px solid #A7F3D0;
+}
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.section-desc strong { color: var(--color-text); }
+
+/* === 1. WEF DATA — Big Numbers === */
+.data-source-bar {
+  background: var(--color-navy);
+  color: #94A3B8;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.data-source-bar::before {
+  content: 'SOURCE';
+  background: #FCD34D;
+  color: #0F172A;
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.data-source-bar strong { color: white; }
+
+.big-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.big-stat {
+  background: white;
+  border-radius: 14px;
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-top: 4px solid;
+  transition: transform 0.2s;
+}
+.big-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+.big-stat:nth-child(1) { border-top-color: var(--color-danger); }
+.big-stat:nth-child(2) { border-top-color: var(--color-amber); }
+.big-stat:nth-child(3) { border-top-color: var(--color-primary); }
+.big-stat:nth-child(4) { border-top-color: var(--color-cyan); }
+.big-stat-num {
+  font-size: 2.75rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+.big-stat:nth-child(1) .big-stat-num { color: var(--color-danger); }
+.big-stat:nth-child(2) .big-stat-num { color: var(--color-amber-dark); }
+.big-stat:nth-child(3) .big-stat-num { color: var(--color-primary); }
+.big-stat:nth-child(4) .big-stat-num { color: var(--color-cyan); }
+.big-stat-label {
+  font-size: 0.9rem;
+  font-weight: 900;
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+}
+.big-stat-desc {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+.wef-message {
+  background: linear-gradient(135deg, #064E3B 0%, #047857 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  text-align: center;
+}
+.wef-message .accent { color: #FCD34D; font-weight: 900; }
+
+/* === 2. 실제 일어난 구조조정 === */
+.layoff-intro {
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  margin-bottom: 2.5rem;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+.layoff-intro strong { color: var(--color-danger-dark); }
+
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.company-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-danger);
+  position: relative;
+  transition: transform 0.2s;
+}
+.company-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(220,38,38,0.1);
+}
+.company-name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.company-cut {
+  display: inline-block;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.company-reason {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.65;
+}
+.company-reason strong { color: var(--color-danger-dark); font-weight: 700; }
+
+.ceo-quote {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ceo-quote::before {
+  content: '"';
+  position: absolute;
+  top: -2rem; left: 1rem;
+  font-size: 8rem;
+  font-family: Georgia, serif;
+  color: rgba(252,211,77,0.15);
+  line-height: 1;
+}
+.ceo-quote-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+.ceo-quote-text .accent { color: #FCD34D; }
+.ceo-quote-attr {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 3. I→T→π→X 인재 진화 === */
+.shape-evolution {
+  background: linear-gradient(180deg, #F8FAFC 0%, #ECFEFF 100%);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+}
+.shape-evolution::before {
+  content: 'TALENT // EVOLUTION';
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--color-muted);
+}
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.shape-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem 1.25rem;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  position: relative;
+  transition: all 0.2s;
+}
+.shape-card:hover {
+  transform: translateY(-5px);
+}
+.shape-letter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.05em;
+}
+.shape-name {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 0.25rem;
+}
+.shape-en {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.85rem;
+}
+.shape-status {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.shape-desc {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+.shape-desc strong { color: var(--color-text); }
+
+.shape-i {
+  border-color: var(--color-danger);
+  background: linear-gradient(180deg, white 0%, #FEF2F2 100%);
+}
+.shape-i .shape-letter { color: var(--color-danger); }
+.shape-i .shape-status {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+.shape-i .shape-name { color: var(--color-danger-dark); }
+
+.shape-t {
+  border-color: var(--color-amber);
+  background: linear-gradient(180deg, white 0%, #FFFBEB 100%);
+}
+.shape-t .shape-letter { color: var(--color-amber-dark); }
+.shape-t .shape-status {
+  background: var(--color-amber-light);
+  color: var(--color-amber-dark);
+}
+.shape-t .shape-name { color: var(--color-amber-dark); }
+
+.shape-pi {
+  border-color: var(--color-primary);
+  background: linear-gradient(180deg, white 0%, #D1FAE5 100%);
+  box-shadow: 0 4px 12px rgba(5,150,105,0.15);
+}
+.shape-pi .shape-letter { color: var(--color-primary); }
+.shape-pi .shape-status {
+  background: var(--color-primary);
+  color: white;
+}
+.shape-pi .shape-name { color: var(--color-primary-dark); }
+
+.shape-x {
+  border-color: var(--color-purple);
+  background: linear-gradient(180deg, white 0%, #EDE9FE 100%);
+  box-shadow: 0 4px 12px rgba(124,58,237,0.15);
+}
+.shape-x .shape-letter { color: var(--color-purple); }
+.shape-x .shape-status {
+  background: var(--color-purple);
+  color: white;
+}
+.shape-x .shape-name { color: #5B21B6; }
+
+.evolution-arrow-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+  position: relative;
+}
+.evo-arrow-cell {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 1.25rem;
+  font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+}
+.evolution-message {
+  margin-top: 1.75rem;
+  text-align: center;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  color: var(--color-text);
+  border: 1px dashed var(--color-primary);
+  font-size: 1rem;
+}
+.evolution-message .danger { color: var(--color-danger); }
+.evolution-message .safe { color: var(--color-primary); }
+
+/* === 4. 왜 융합형인가 — AI vs Human === */
+.vs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.vs-card {
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  overflow: hidden;
+  position: relative;
+}
+.vs-ai {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  color: white;
+}
+.vs-human {
+  background: linear-gradient(135deg, #064E3B 0%, #047857 100%);
+  color: white;
+}
+.vs-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.vs-ai .vs-label { background: #FCA5A5; color: #7F1D1D; }
+.vs-human .vs-label { background: #FCD34D; color: #78350F; }
+.vs-title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+.vs-list {
+  list-style: none;
+  padding: 0;
+}
+.vs-list li {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+.vs-list li:last-child { border-bottom: none; }
+.vs-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  margin-top: 0.55rem;
+}
+.vs-ai .vs-list li::before { background: #FCA5A5; }
+.vs-human .vs-list li::before { background: #FCD34D; }
+
+.vs-conclusion {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 2px solid var(--color-amber);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-amber-dark);
+  line-height: 1.65;
+}
+
+/* === 5. 융합 6대 영역 === */
+.fusion-hexa {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+.fusion-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+.fusion-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+.fusion-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-emerald));
+}
+.fusion-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.fusion-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.fusion-name {
+  font-size: 1.05rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+  color: var(--color-text);
+}
+.fusion-tech {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  margin-bottom: 0.65rem;
+  letter-spacing: 0.02em;
+}
+.fusion-desc {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.fusion-center-msg {
+  background: linear-gradient(135deg, #064E3B 0%, #047857 50%, #065F46 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.fusion-center-msg::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(252,211,77,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.fusion-center-msg > * { position: relative; z-index: 1; }
+.fusion-center-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #FCD34D;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+.fusion-center-text {
+  font-size: 1.3rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+.fusion-center-text .accent { color: #FCD34D; }
+
+/* === 6. 우리 교육이 키우는 인재 === */
+.our-talent {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.our-talent-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary-dark);
+}
+.our-talent-sub {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+.profile-traits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem 1.5rem;
+}
+.trait-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+  border-radius: 10px;
+  border-left: 3px solid var(--color-primary);
+}
+.trait-check {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+.trait-text {
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.trait-text strong { color: var(--color-primary-dark); }
+
+/* === CLOSING === */
+.closing {
+  background:
+    linear-gradient(135deg, #0F172A 0%, #064E3B 50%, #047857 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(252,211,77,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252,211,77,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.closing > * { position: relative; z-index: 1; }
+.closing-eyebrow {
+  display: inline-block;
+  background: rgba(252,211,77,0.2);
+  border: 1px solid rgba(252,211,77,0.4);
+  color: #FCD34D;
+  padding: 0.4rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.closing-text {
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1.45;
+  margin-bottom: 1.5rem;
+}
+.closing-text .accent {
+  background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-fcla {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.92;
+  line-height: 1.7;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === 푸터 === */
+.footer {
+  background: #0F172A;
+  color: #94A3B8;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.88rem;
+}
+.footer strong { color: white; }
+.footer-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  opacity: 0.65;
+}
+
+/* === 반응형 === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .section-title { font-size: 1.6rem; }
+
+  .big-stats { grid-template-columns: 1fr 1fr; }
+  .shape-grid { grid-template-columns: 1fr 1fr; }
+  .evolution-arrow-row { display: none; }
+
+  .vs-grid { grid-template-columns: 1fr; }
+  .fusion-hexa { grid-template-columns: 1fr; }
+  .profile-traits { grid-template-columns: 1fr; }
+
+  .ceo-quote-text { font-size: 1.05rem; }
+  .closing-text { font-size: 1.25rem; }
+  .fusion-center-text { font-size: 1.1rem; }
+}
+
+/* === 인쇄 === */
+@media print {
+  body { background: white; }
+  .hero, .closing, .ceo-quote, .vs-ai, .vs-human, .fusion-center-msg, .wef-message {
+    background: #064E3B !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  section { page-break-inside: avoid; padding: 1.5rem 0; }
+  .shape-card, .company-card, .fusion-card { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span>◆</span> AI Era Talent Profile · 글로벌 데이터 기반 청사진
+    </div>
+    <h1>
+      한 분야만 깊게 파면<br>
+      <span class="strike">전문가가 된다</span><br>
+      <span class="accent">→ 구조조정 대상이 된다</span>
+    </h1>
+    <p class="hero-subtitle">
+      AI가 발달한 지금, <strong>단일 분야 전문성만으로는 더 이상 안전하지 않습니다</strong>.<br>
+      WEF · McKinsey · 글로벌 빅테크의 데이터가 일치된 신호를 보내고 있습니다 —
+      살아남는 인재는 <strong>다양한 시스템 구조를 이해하고, 기술과 데이터를 융합할 줄 아는 사람</strong>입니다.
+    </p>
+    <div class="hero-quote">
+      "이 자료는 우리가 왜 융합형 인재를 키우는지 — 글로벌 데이터로 보여주는 청사진입니다.<br>
+      교육생이 자신의 커리어를 어떻게 설계해야 하는지 알게 됩니다."
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-item">WEF Future of Jobs 2025</span>
+      <span class="hero-meta-item">Lightcast AI Skills Report</span>
+      <span class="hero-meta-item">Microsoft · IBM · Accenture Layoffs</span>
+      <span class="hero-meta-item">T/π/X-Shaped Framework</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== 1. 글로벌 데이터가 말하는 진실 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 01 Global Signals</span>
+      <h2 class="section-title">글로벌 데이터가 말하는 진실</h2>
+      <p class="section-desc">
+        세계경제포럼(WEF)이 <strong>전 세계 1,000개 이상의 기업, 1,400만 명의 노동자</strong>를
+        대상으로 조사한 결과는 분명합니다.
+      </p>
+    </div>
+
+    <div class="data-source-bar">
+      WEF Future of Jobs Report 2025 ·
+      <strong>1,000+ 글로벌 기업</strong> ·
+      <strong>14M+ 노동자</strong> ·
+      <strong>22개 산업군</strong> ·
+      <strong>55개국</strong> 대상 조사
+    </div>
+
+    <div class="big-stats">
+      <div class="big-stat">
+        <div class="big-stat-num">39%</div>
+        <div class="big-stat-label">필수 스킬이 바뀐다</div>
+        <div class="big-stat-desc">2030년까지 노동자의 핵심 스킬 39%가 바뀔 것으로 예상 — 지금 알고 있는 것의 거의 절반이 무용해짐</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num">92M</div>
+        <div class="big-stat-label">사라지는 일자리</div>
+        <div class="big-stat-desc">2030년까지 9,200만 개 일자리가 사라지고 1억 7,000만 개의 새 일자리가 창출 — 구조조정의 규모</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num">#1</div>
+        <div class="big-stat-label">AI · Big Data</div>
+        <div class="big-stat-desc">AI와 빅데이터가 가장 빠르게 성장하는 스킬 1위, 그 뒤를 네트워크·사이버보안·기술 리터러시가 잇는다</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num">63%</div>
+        <div class="big-stat-label">스킬 격차가 최대 장벽</div>
+        <div class="big-stat-desc">고용주의 63%가 스킬 격차를 기업 혁신의 가장 큰 장벽으로 꼽음</div>
+      </div>
+    </div>
+
+    <div class="wef-message">
+      💡 <span class="accent">한 분야만 파는 사람</span>의 시대는 끝났습니다 —
+      <span class="accent">기술 · 데이터 · 시스템을 연결</span>할 줄 아는 인재가 필요한 시대로 진입했습니다
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. 실제 일어나고 있는 구조조정 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 02 Reality Check</span>
+      <h2 class="section-title">이미 일어나고 있는 일</h2>
+      <p class="section-desc">
+        2025년 한 해 동안 <strong>AI를 명시적 사유로 한 구조조정만 5만 명 이상</strong>.<br>
+        가장 충격적인 사실은 <strong>회사들이 적자가 아닌 흑자 상태</strong>에서 인원을 줄이고 있다는 것입니다.
+      </p>
+    </div>
+
+    <p class="layoff-intro">
+      "비용 절감이 아니라 <strong>업무 구조의 재편</strong>입니다.
+      반복적 · 단일 영역 직무는 AI가 대체하고,
+      회사는 그 비용으로 AI 인프라와 융합형 인재에 재투자합니다."
+    </p>
+
+    <div class="companies-grid">
+
+      <div class="company-card">
+        <div class="company-name">Microsoft</div>
+        <span class="company-cut">15,000+ 명 감축 (2025)</span>
+        <p class="company-reason">
+          CEO Satya Nadella는 GitHub Copilot 같은 AI 도구가 신규 코드의 최대 30%를 작성하고 있어 지원 인력 계층이 줄어들고 있다고 밝힘. <strong>흑자 상황</strong>에서도 단행.
+        </p>
+      </div>
+
+      <div class="company-card">
+        <div class="company-name">IBM</div>
+        <span class="company-cut">8,000 명 감축 (HR 부서)</span>
+        <p class="company-reason">
+          HR 부서를 중심으로 약 8,000명을 감축했으며, 그 자리를 'AskHR'이라는 내부 AI 챗봇이 대체. 회사는 대신 <strong>소프트웨어 엔지니어와 데이터 분석가</strong>를 채용 중.
+        </p>
+      </div>
+
+      <div class="company-card">
+        <div class="company-name">Salesforce</div>
+        <span class="company-cut">4,000+ 명 감축</span>
+        <p class="company-reason">
+          CEO Marc Benioff는 AI가 회사 업무의 30~50%를 처리한다고 공개. 4,000명 이상을 감축하며 고객 서비스와 소프트웨어 개발 자동화에 집중.
+        </p>
+      </div>
+
+      <div class="company-card">
+        <div class="company-name">Accenture</div>
+        <span class="company-cut">11,000 명 감축 (2025)</span>
+        <p class="company-reason">
+          CEO Julie Sweet는 "재교육이 불가능한 사람은 내보낼 것"이라고 명시. <strong>재교육 가능 여부</strong>가 생존을 가르는 기준이 된 시대.
+        </p>
+      </div>
+
+      <div class="company-card">
+        <div class="company-name">Amazon</div>
+        <span class="company-cut">14,000+ 명 (2025-26)</span>
+        <p class="company-reason">
+          CEO Andy Jassy는 내부 메모에서 AI 에이전트 도입으로 향후 기업 노동력 규모가 줄어들 것이라고 명시.
+        </p>
+      </div>
+
+      <div class="company-card">
+        <div class="company-name">TCS (인도 IT 거인)</div>
+        <span class="company-cut">12,000 명 감축</span>
+        <p class="company-reason">
+          중간 · 시니어 관리 직급을 중심으로 약 12,000명(전체의 2%)을 줄이고 있으며, AI 기반 업무 변화가 핵심 이유. <strong>관리직도 안전하지 않음</strong>.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="ceo-quote">
+      <p class="ceo-quote-text">
+        <span class="accent">"재교육이 불가능한 사람은 내보낼 것입니다.<br>
+        고급 AI가 모든 업무의 일부가 되고 있기 때문입니다."</span>
+      </p>
+      <p class="ceo-quote-attr">
+        — Julie Sweet, Accenture CEO (2025)
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. 인재 진화: I → T → π → X ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 03 Talent Shape Evolution</span>
+      <h2 class="section-title">인재의 모양이 진화하고 있다</h2>
+      <p class="section-desc">
+        글로벌 HR · 학계가 공통으로 사용하는 <strong>인재 모형 프레임워크</strong>입니다.<br>
+        지금 어느 위치에 있는지, 어디로 가야 하는지가 한눈에 보입니다.
+      </p>
+    </div>
+
+    <div class="shape-evolution">
+
+      <div class="shape-grid">
+
+        <div class="shape-card shape-i">
+          <div class="shape-letter">I</div>
+          <div class="shape-name">I형 인재</div>
+          <div class="shape-en">I-SHAPED</div>
+          <span class="shape-status">⚠ 위험</span>
+          <p class="shape-desc">
+            한 분야만 <strong>깊게</strong> 파는 전문가. 과거에는 안정적이었지만,
+            <strong>AI 자동화 1순위 대상</strong>이 됨.
+          </p>
+        </div>
+
+        <div class="shape-card shape-t">
+          <div class="shape-letter">T</div>
+          <div class="shape-name">T형 인재</div>
+          <div class="shape-en">T-SHAPED</div>
+          <span class="shape-status">○ 기본</span>
+          <p class="shape-desc">
+            <strong>1개 전문성 + 인접 분야 협업 능력</strong>.
+            1995년부터 표준이었으나 지금은 <strong>최소한의 요건</strong>으로 격하.
+          </p>
+        </div>
+
+        <div class="shape-card shape-pi">
+          <div class="shape-letter">π</div>
+          <div class="shape-name">Pi (π)형 인재</div>
+          <div class="shape-en">PI-SHAPED · M-SHAPED</div>
+          <span class="shape-status">★ AI 시대</span>
+          <p class="shape-desc">
+            <strong>2개 이상의 깊은 전문성</strong>을 가지고 그 사이를
+            연결하는 인재. <strong>AI 시대의 표준</strong>으로 부상.
+          </p>
+        </div>
+
+        <div class="shape-card shape-x">
+          <div class="shape-letter">X</div>
+          <div class="shape-name">X형 인재</div>
+          <div class="shape-en">X-SHAPED · 초융합</div>
+          <span class="shape-status">★ 최상위</span>
+          <p class="shape-desc">
+            T를 넘어 <strong>이종 분야를 초월</strong>해 연결.
+            <strong>조직 리더</strong>와 신산업 창조자가 되는 인재.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="evolution-arrow-row">
+        <div class="evo-arrow-cell">↓ 위험</div>
+        <div class="evo-arrow-cell">→</div>
+        <div class="evo-arrow-cell">→</div>
+        <div class="evo-arrow-cell">↑ 안전</div>
+      </div>
+
+      <div class="evolution-message">
+        💡 지금 <span class="danger">I형</span>에 머물러 있다면 곧 구조조정 대상 —
+        <span class="safe">π형 · X형</span>으로 진화해야 살아남습니다
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. 왜 융합형이 살아남는가 (AI vs Human) ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 04 Why Convergence Wins</span>
+      <h2 class="section-title">왜 융합형 인재만 살아남는가</h2>
+      <p class="section-desc">
+        간단한 진실 — <strong>AI는 한 분야 안에서는 사람보다 잘하지만,
+        분야를 연결하는 일은 못합니다</strong>.<br>
+        그 연결을 해내는 사람이 살아남고 더 비싸집니다.
+      </p>
+    </div>
+
+    <div class="vs-grid">
+
+      <div class="vs-card vs-ai">
+        <span class="vs-label">▼ AI가 잘하는 것</span>
+        <h3 class="vs-title">단일 영역 · 정형 업무</h3>
+        <ul class="vs-list">
+          <li>코드 자동 작성 (Copilot, Claude Code)</li>
+          <li>고객 응대 · 콜센터 응답</li>
+          <li>단순 콘텐츠 생성 (블로그, 광고 카피)</li>
+          <li>데이터 정리 · 보고서 초안</li>
+          <li>반복 분석 · 정형 리서치</li>
+          <li>표준화된 행정 처리</li>
+        </ul>
+      </div>
+
+      <div class="vs-card vs-human">
+        <span class="vs-label">▲ 사람만 할 수 있는 것</span>
+        <h3 class="vs-title">분야를 연결하는 일</h3>
+        <ul class="vs-list">
+          <li><strong>공정</strong>의 현실과 <strong>AI</strong> 모델을 매칭</li>
+          <li><strong>현장</strong>의 데이터를 <strong>경영 KPI</strong>로 번역</li>
+          <li><strong>OT(설비)</strong>와 <strong>IT(소프트웨어)</strong>를 연결</li>
+          <li>여러 부서 · 이해관계자의 협업 설계</li>
+          <li>안전 · 윤리 · 책임 판단</li>
+          <li>새로운 사업 · 새 시스템 구상</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="vs-conclusion">
+      💡 AI 스킬을 갖춘 비기술직 직무는 평균 28% 높은 연봉(약 $18,000/년 추가)을 제시 —
+      즉 <strong>여러 영역을 융합하는 인재일수록 더 비싸진다</strong>는 의미입니다.
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. 우리가 가르치는 6대 융합 영역 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 05 What We Teach</span>
+      <h2 class="section-title">우리는 6개 분야를 한 사람 안에 융합시킵니다</h2>
+      <p class="section-desc">
+        피지컬 AI 교육의 본질은 <strong>로봇 · AI · 데이터 · 네트워크 · 공정 · 경영</strong> —
+        이 6개를 한 명의 머릿속에서 연결하게 만드는 것입니다.
+      </p>
+    </div>
+
+    <div class="fusion-hexa">
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/01</div>
+        <span class="fusion-icon">🤖</span>
+        <div class="fusion-name">로봇 · 하드웨어</div>
+        <div class="fusion-tech">SO-ARM101 · LeKiwi · 모터 · 인코더</div>
+        <p class="fusion-desc">
+          물리 세계에서 실제로 움직이는 것을 다루는 능력.
+          오차와 제약을 받아들이는 사고법.
+        </p>
+      </div>
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/02</div>
+        <span class="fusion-icon">🧠</span>
+        <div class="fusion-name">AI 모델</div>
+        <div class="fusion-tech">ACT · Diffusion · SmolVLA · pi₀-fast</div>
+        <p class="fusion-desc">
+          모델을 만들 줄도 알아야 하지만,
+          <strong>어떤 모델이 어디에 맞는지 판단</strong>하는 것이 더 중요.
+        </p>
+      </div>
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/03</div>
+        <span class="fusion-icon">📊</span>
+        <div class="fusion-name">데이터</div>
+        <div class="fusion-tech">Teleop · Telemetry · 라벨링</div>
+        <p class="fusion-desc">
+          무엇을 · 얼마나 · 어떻게 수집할지 설계하는 능력.
+          <strong>데이터 질이 결과 질을 결정</strong>한다는 체득.
+        </p>
+      </div>
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/04</div>
+        <span class="fusion-icon">🌐</span>
+        <div class="fusion-name">네트워크 · 통신</div>
+        <div class="fusion-tech">MQTT · UNS · OPC UA · ROS2</div>
+        <p class="fusion-desc">
+          Edge · Local · Cloud 분할 설계,
+          OT(공장 설비) ↔ IT(소프트웨어) 연동 능력.
+        </p>
+      </div>
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/05</div>
+        <span class="fusion-icon">🏭</span>
+        <div class="fusion-name">공정 · 운영</div>
+        <div class="fusion-tech">Smart Factory · OEE · 안전 설계</div>
+        <p class="fusion-desc">
+          현장의 흐름을 데이터 구조로 풀어내는 능력 —
+          AI 적용의 진짜 출발점.
+        </p>
+      </div>
+
+      <div class="fusion-card">
+        <div class="fusion-num">F/06</div>
+        <span class="fusion-icon">📈</span>
+        <div class="fusion-name">경영 · KPI</div>
+        <div class="fusion-tech">사이클 타임 · 양품률 · ROI</div>
+        <p class="fusion-desc">
+          기술 결과를 <strong>경영 언어로 번역</strong>하는 능력.
+          이걸 못하면 어떤 좋은 프로젝트도 무산됨.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="fusion-center-msg">
+      <div class="fusion-center-label">◆ Core Belief</div>
+      <p class="fusion-center-text">
+        "한 사람이 6개 분야를 모두 <span class="accent">전문가 수준</span>으로 할 필요는 없습니다.<br>
+        하지만 6개 분야의 <span class="accent">구조와 언어</span>를 이해하고 <span class="accent">연결할 줄 알아야</span> 합니다."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. 우리 교육이 키우는 인재상 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 06 Our Talent Profile</span>
+      <h2 class="section-title">우리 교육이 키우는 인재의 모습</h2>
+      <p class="section-desc">
+        교육이 끝났을 때 교육생이 갖추게 될 <strong>구체적인 능력 8가지</strong>입니다.<br>
+        이것이 바로 <strong>π형 · X형 인재</strong>의 정의입니다.
+      </p>
+    </div>
+
+    <div class="our-talent">
+      <h3 class="our-talent-title">Field-Connected Convergence Talent</h3>
+      <p class="our-talent-sub">현장 연결형 · 융합형 인재</p>
+
+      <div class="profile-traits">
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            <strong>공정의 현실</strong>을 보고 → AI 적용 가능한
+            <strong>데이터 구조</strong>로 번역할 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            여러 AI 모델 중 <strong>어떤 모델이 우리 상황에 맞는지</strong>
+            근거를 들어 판단할 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            Edge / Cloud 어디서 추론할지,
+            <strong>지연 · 안전 · 비용</strong>을 함께 고려해 설계할 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            MQTT · OPC UA · UNS로 <strong>OT와 IT를 연결</strong>해
+            실제 공장에 적용할 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            ChatGPT · Claude · Gemini를
+            <strong>팀 멤버처럼 활용</strong>해 협업 생산성을 극대화한다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            기술 결과를 <strong>사이클 타임 · OEE · ROI</strong>로 번역해
+            경영진과 대화할 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            한 분야가 막혀도 <strong>인접 분야 지식</strong>으로
+            우회로를 찾을 수 있다
+          </div>
+        </div>
+
+        <div class="trait-row">
+          <div class="trait-check">✓</div>
+          <div class="trait-text">
+            새 기술이 나와도 <strong>스스로 학습하고 통합</strong>할 수 있는
+            평생 학습자의 태도를 가진다
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CLOSING ========== -->
+<section>
+  <div class="container">
+    <div class="closing">
+      <span class="closing-eyebrow">◆ Message to Trainees</span>
+      <p class="closing-text">
+        한 분야만 깊게 파는 시대는 끝났습니다.<br>
+        <span class="accent">시스템을 이해하고 · 융합할 줄 아는 사람</span>만이<br>
+        AI 시대를 함께 이끌어갑니다.
+      </p>
+      <p class="closing-fcla">
+        <strong>FCLA — Field-Connected Learning Approach</strong><br>
+        AI는 똑똑한 모델이 아니라,<br>
+        현장 데이터가 학습으로 되돌아오는 순환 구조가 완성될 때 산업이 된다.<br>
+        그리고 그 순환을 설계할 수 있는 사람이 — 바로 우리가 키우는 인재입니다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 푸터 ========== -->
+<footer class="footer">
+  <div class="container">
+    <p><strong>AI 시대의 인재상 — 글로벌 데이터 기반 청사진</strong> · FCLA Curriculum · Handong University Partnership</p>
+    <p class="footer-mono">
+      // SOURCES: WEF Future of Jobs Report 2025 · Lightcast 2025 AI Index · Programs.com Layoffs Tracker · Wikipedia T-shaped skills · Oreate AI Blog
+    </p>
+    <p style="margin-top: 0.75rem; opacity: 0.65;">© Physical AI Leadership Education Program · Talent Profile v1.0</p>
+  </div>
+</footer>
+
+</body>
+</html>

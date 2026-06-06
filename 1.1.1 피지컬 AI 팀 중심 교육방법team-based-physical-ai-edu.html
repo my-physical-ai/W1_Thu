@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 중심 기반 피지컬 AI 교육방법 — Physical AI Team Education</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-primary: #7C3AED;
+  --color-primary-light: #EDE9FE;
+  --color-primary-dark: #4C1D95;
+  --color-secondary: #2563EB;
+  --color-secondary-light: #DBEAFE;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-danger: #DC2626;
+  --color-danger-light: #FEE2E2;
+  --color-pink: #DB2777;
+  --color-pink-light: #FCE7F3;
+  --color-teal: #0891B2;
+  --color-teal-light: #CFFAFE;
+  --color-surface: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-text: #1E293B;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--color-text);
+  background: var(--color-surface);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre { font-family: 'JetBrains Mono', monospace; }
+
+.container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4rem 0; }
+
+/* === HERO === */
+.hero {
+  background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 50%, #2563EB 100%);
+  color: white;
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 720px;
+  margin-bottom: 2rem;
+}
+.hero-quote {
+  display: inline-block;
+  border-left: 4px solid #FCD34D;
+  padding: 0.5rem 1.25rem;
+  background: rgba(255,255,255,0.08);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* === SECTION HEADER === */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-eyebrow {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* === 패러다임 변화 (Before/After) === */
+.paradigm-shift {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+.paradigm-card {
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+}
+.paradigm-card.before {
+  background: #F1F5F9;
+  border: 2px solid #CBD5E1;
+}
+.paradigm-card.after {
+  background: linear-gradient(135deg, #EDE9FE 0%, #DBEAFE 100%);
+  border: 2px solid var(--color-primary);
+}
+.paradigm-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.paradigm-card.before .paradigm-label {
+  background: #94A3B8; color: white;
+}
+.paradigm-card.after .paradigm-label {
+  background: var(--color-primary); color: white;
+}
+.paradigm-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.paradigm-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.paradigm-step {
+  background: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.paradigm-card.before .paradigm-step {
+  color: #64748B;
+  border: 1px solid #E2E8F0;
+}
+.paradigm-card.after .paradigm-step {
+  color: var(--color-text);
+  border: 1px solid #C4B5FD;
+  box-shadow: 0 2px 4px rgba(124,58,237,0.08);
+}
+.paradigm-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: 900;
+}
+.paradigm-conclusion {
+  text-align: center;
+  background: linear-gradient(135deg, #4C1D95, #7C3AED);
+  color: white;
+  padding: 1.25rem 2rem;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+}
+
+/* === 교육 타입 5가지 OVERVIEW === */
+.types-pyramid {
+  background: linear-gradient(180deg, #F5F3FF 0%, #EFF6FF 100%);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  position: relative;
+}
+.pyramid-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  gap: 0.75rem;
+}
+.pyramid-block {
+  background: white;
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.pyramid-block:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+.pyramid-block .pb-icon { font-size: 1.5rem; }
+.pyramid-block .pb-label { font-size: 0.95rem; }
+.pyramid-block .pb-sub { font-size: 0.75rem; font-weight: 500; color: var(--color-muted); }
+
+.pb-l1 { border-color: var(--color-pink); width: 280px; background: linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%); }
+.pb-l1 .pb-label { color: var(--color-pink); }
+.pb-l2 { border-color: var(--color-primary); width: 220px; background: linear-gradient(135deg, #EDE9FE 0%, #DDD6FE 100%); }
+.pb-l2 .pb-label { color: var(--color-primary); }
+.pb-l3 { border-color: var(--color-secondary); width: 200px; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); }
+.pb-l3 .pb-label { color: var(--color-secondary); }
+.pb-l4 { border-color: var(--color-success); width: 170px; background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%); }
+.pb-l4 .pb-label { color: var(--color-success); }
+.pb-l5 { border-color: var(--color-warning); width: 170px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); }
+.pb-l5 .pb-label { color: var(--color-warning); }
+
+.pyramid-flow-arrow {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--color-muted);
+  margin: 0.25rem 0;
+  font-weight: 900;
+}
+.pyramid-caption {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+
+/* === 교육 타입 상세 카드 === */
+.type-detail {
+  background: var(--color-card);
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06), 0 2px 4px -2px rgba(0,0,0,0.04);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+.type-header {
+  padding: 1.5rem 2rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.type-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  opacity: 0.4;
+  line-height: 1;
+}
+.type-icon {
+  font-size: 2.5rem;
+}
+.type-title-wrap { flex: 1; }
+.type-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 0.25rem;
+}
+.type-title-en {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.type-tag {
+  background: rgba(255,255,255,0.2);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.type-1 .type-header { background: linear-gradient(135deg, #DB2777 0%, #BE185D 100%); }
+.type-2 .type-header { background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); }
+.type-3 .type-header { background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); }
+.type-4 .type-header { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+.type-5 .type-header { background: linear-gradient(135deg, #D97706 0%, #B45309 100%); }
+
+.type-body { padding: 1.75rem 2rem 2rem; }
+.type-description {
+  font-size: 1.02rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+.type-description strong { color: var(--color-primary); }
+
+.type-examples {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.type-examples-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.example-item {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px dashed var(--color-border);
+  align-items: flex-start;
+}
+.example-item:last-child { border-bottom: none; padding-bottom: 0; }
+.example-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  width: 32px;
+  text-align: center;
+}
+.example-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.example-text strong { font-weight: 700; }
+
+.type-result {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+.type-1 .type-result { background: var(--color-pink-light); color: #BE185D; }
+.type-2 .type-result { background: var(--color-primary-light); color: var(--color-primary-dark); }
+.type-3 .type-result { background: var(--color-secondary-light); color: #1E40AF; }
+.type-4 .type-result { background: var(--color-success-light); color: #047857; }
+.type-5 .type-result { background: var(--color-warning-light); color: #B45309; }
+.type-result-icon { font-size: 1.25rem; }
+
+/* === Mini Smart Factory 환경 === */
+.factory-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%);
+  padding: 2.5rem 1.5rem;
+  border-radius: 20px;
+}
+.stack-layer {
+  width: 100%;
+  max-width: 580px;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
+  border: 2px solid;
+  background: white;
+}
+.stack-icon {
+  font-size: 2.25rem;
+  width: 60px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.stack-content { flex: 1; }
+.stack-title {
+  font-weight: 900;
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+.stack-desc {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+.stack-arrow {
+  font-size: 1.5rem;
+  color: #94A3B8;
+  margin: 0.5rem 0;
+  font-weight: 900;
+}
+.sl-1 { border-color: var(--color-primary); }
+.sl-1 .stack-title { color: var(--color-primary); }
+.sl-2 { border-color: var(--color-success); }
+.sl-2 .stack-title { color: var(--color-success); }
+.sl-3 { border-color: var(--color-teal); }
+.sl-3 .stack-title { color: var(--color-teal); }
+.sl-4 { border-color: var(--color-warning); }
+.sl-4 .stack-title { color: var(--color-warning); }
+.sl-5 { border-color: var(--color-pink); }
+.sl-5 .stack-title { color: var(--color-pink); }
+
+.factory-conclusion {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+
+/* === 3인 1팀 운영 구조 === */
+.team-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.team-step {
+  background: var(--color-card);
+  border-radius: 14px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  position: relative;
+  transition: all 0.2s;
+}
+.team-step:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 16px rgba(124,58,237,0.15);
+}
+.team-step-num {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #7C3AED, #4C1D95);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  margin: 0 auto 0.75rem;
+  box-shadow: 0 4px 6px rgba(124,58,237,0.3);
+}
+.team-step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--color-text);
+}
+.team-step-desc {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+.team-conclusion {
+  background: linear-gradient(135deg, #EDE9FE 0%, #DBEAFE 100%);
+  border-left: 4px solid var(--color-primary);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 12px 12px 0;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  font-size: 1.02rem;
+}
+
+/* === 실습 시나리오 진화 === */
+.scenario-evolution {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.scenario-card {
+  background: var(--color-card);
+  border-radius: 16px;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+}
+.scenario-card:hover {
+  transform: translateY(-5px);
+}
+.scenario-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+}
+.scenario-stage {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.4rem;
+}
+.scenario-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+.scenario-desc {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+.sc-1 { border-color: var(--color-secondary); }
+.sc-1 .scenario-title { color: var(--color-secondary); }
+.sc-2 { border-color: var(--color-primary); }
+.sc-2 .scenario-title { color: var(--color-primary); }
+.sc-3 { border-color: var(--color-success); }
+.sc-3 .scenario-title { color: var(--color-success); }
+.scenario-arrow {
+  font-size: 2rem;
+  color: var(--color-primary);
+  font-weight: 900;
+  text-align: center;
+}
+
+/* === 기대 효과 stat cards === */
+.effect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.effect-card {
+  background: var(--color-card);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.effect-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+.effect-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+.effect-title {
+  font-weight: 900;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+.effect-desc {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* === 핵심 차별성 === */
+.differentiator {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.differentiator::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124,58,237,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.differentiator > * { position: relative; z-index: 1; }
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+.diff-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.diff-cross {
+  background: rgba(220,38,38,0.15);
+  border: 2px solid #DC2626;
+  text-decoration: line-through;
+  text-decoration-color: #DC2626;
+  text-decoration-thickness: 3px;
+  font-size: 1.05rem;
+}
+.diff-arrow {
+  font-size: 2rem;
+  color: #FCD34D;
+  font-weight: 900;
+}
+.diff-check {
+  background: rgba(5,150,105,0.2);
+  border: 2px solid #10B981;
+  font-size: 1.1rem;
+}
+.diff-conclusion {
+  font-size: 1.25rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 1.5rem;
+}
+
+/* === 최종 목표 (FCLA 메시지) === */
+.final-goal {
+  background: linear-gradient(135deg, #4C1D95 0%, #7C3AED 50%, #2563EB 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 3.5rem 2rem;
+  text-align: center;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.final-goal::before {
+  content: '"';
+  position: absolute;
+  top: 0; left: 1rem;
+  font-size: 12rem;
+  font-family: 'Georgia', serif;
+  color: rgba(255,255,255,0.1);
+  line-height: 1;
+}
+.goal-eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  padding: 0.4rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+.goal-text {
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.01em;
+}
+.goal-fcla {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.92;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 푸터 === */
+.footer {
+  background: #0F172A;
+  color: #94A3B8;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.88rem;
+}
+.footer strong { color: white; }
+
+/* === 반응형 === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .section-title { font-size: 1.6rem; }
+
+  .paradigm-shift { grid-template-columns: 1fr; }
+  .paradigm-arrow { transform: rotate(90deg); padding: 0.5rem 0; }
+
+  .pyramid-block { width: auto !important; min-width: 240px; }
+
+  .team-flow { grid-template-columns: 1fr 1fr; }
+  .scenario-evolution { grid-template-columns: 1fr; }
+  .scenario-arrow { transform: rotate(90deg); padding: 0.5rem 0; }
+
+  .diff-grid { grid-template-columns: 1fr; }
+  .diff-arrow { transform: rotate(90deg); padding: 0.5rem 0; }
+
+  .type-header { flex-wrap: wrap; padding: 1.25rem 1.5rem; }
+  .type-body { padding: 1.25rem 1.5rem 1.5rem; }
+  .type-title { font-size: 1.15rem; }
+
+  .stack-layer { padding: 1rem; flex-direction: row; }
+  .stack-icon { font-size: 1.75rem; width: 44px; }
+
+  .goal-text { font-size: 1.25rem; }
+}
+
+/* === 인쇄 === */
+@media print {
+  body { background: white; }
+  .hero, .differentiator, .final-goal {
+    background: #4C1D95 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  section { page-break-inside: avoid; padding: 1.5rem 0; }
+  .type-detail { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-tags">
+      <span class="hero-tag">#팀프로젝트</span>
+      <span class="hero-tag">#FCLA</span>
+      <span class="hero-tag">#스마트팩토리</span>
+      <span class="hero-tag">#현장혁신</span>
+      <span class="hero-tag">#AI실전교육</span>
+    </div>
+    <h1>팀 중심 기반<br>피지컬 AI 교육방법</h1>
+    <p class="hero-subtitle">
+      이론을 듣는 교육이 아니라, 팀이 함께 <strong>현장 문제를 정의하고 · AI로 해결하고 · 실제 로봇으로 검증</strong>하는
+      현장형 AI 교육 방법론입니다.
+    </p>
+    <div class="hero-quote">
+      "교육이 아니라, 현장 문제를 해결하는 AI 프로젝트 과정이다."
+    </div>
+  </div>
+</header>
+
+<!-- ========== 패러다임 변화 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Paradigm Shift</span>
+      <h2 class="section-title">교육 패러다임이 바뀐다</h2>
+      <p class="section-desc">
+        개인 역량 교육에서 <strong>조직 혁신 교육</strong>으로,<br>
+        이론 중심에서 <strong>현장 적용 중심</strong>으로 전환됩니다.
+      </p>
+    </div>
+
+    <div class="paradigm-shift">
+      <div class="paradigm-card before">
+        <span class="paradigm-label">기존 교육</span>
+        <h3 class="paradigm-title">📘 듣고 따라하는 학습</h3>
+        <div class="paradigm-flow">
+          <div class="paradigm-step">📖 이론 강의</div>
+          <div class="paradigm-step">💻 개인 실습</div>
+          <div class="paradigm-step">🏁 종료</div>
+        </div>
+      </div>
+
+      <div class="paradigm-arrow">→</div>
+
+      <div class="paradigm-card after">
+        <span class="paradigm-label">본 교육 (FCLA)</span>
+        <h3 class="paradigm-title">🚀 만들고 검증하는 학습</h3>
+        <div class="paradigm-flow">
+          <div class="paradigm-step">🎯 현장 문제 정의</div>
+          <div class="paradigm-step">👥 팀 프로젝트 설계</div>
+          <div class="paradigm-step">🧠 AI 모델 적용</div>
+          <div class="paradigm-step">🤖 실제 로봇 동작</div>
+          <div class="paradigm-step">🔄 개선 반복</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="paradigm-conclusion">
+      💡 개인 역량 교육 → <strong>조직 혁신 교육</strong>으로의 전환
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5가지 교육 타입 OVERVIEW ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Education Types</span>
+      <h2 class="section-title">5가지 교육 타입의 피라미드</h2>
+      <p class="section-desc">
+        퀴즈로 이해를 점검하고, 개인 미션으로 실험하고, 팀 미션으로 설계하고,<br>
+        최종적으로 <strong>팀 프로젝트로 통합</strong>하는 5단계 학습 구조입니다.
+      </p>
+    </div>
+
+    <div class="types-pyramid">
+      <div class="pyramid-row">
+        <div class="pyramid-block pb-l1">
+          <span class="pb-icon">🎯</span>
+          <span class="pb-label">팀 프로젝트</span>
+          <span class="pb-sub">Team Project · 핵심</span>
+        </div>
+      </div>
+      <div class="pyramid-flow-arrow">▲</div>
+      <div class="pyramid-row">
+        <div class="pyramid-block pb-l2">
+          <span class="pb-icon">🧠</span>
+          <span class="pb-label">팀 미션 (토의)</span>
+          <span class="pb-sub">Team Mission</span>
+        </div>
+      </div>
+      <div class="pyramid-flow-arrow">▲</div>
+      <div class="pyramid-row">
+        <div class="pyramid-block pb-l3">
+          <span class="pb-icon">🔬</span>
+          <span class="pb-label">개인 미션 (토의)</span>
+          <span class="pb-sub">Individual Mission</span>
+        </div>
+      </div>
+      <div class="pyramid-flow-arrow">▲</div>
+      <div class="pyramid-row">
+        <div class="pyramid-block pb-l4">
+          <span class="pb-icon">🤝</span>
+          <span class="pb-label">팀 퀴즈</span>
+          <span class="pb-sub">Team Quiz</span>
+        </div>
+        <div class="pyramid-block pb-l5">
+          <span class="pb-icon">✏️</span>
+          <span class="pb-label">개인 퀴즈</span>
+          <span class="pb-sub">Individual Quiz</span>
+        </div>
+      </div>
+      <p class="pyramid-caption">아래에서 위로 — 이해 점검 → 실험 → 설계 → 통합 구현</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 교육 타입 상세 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Deep Dive</span>
+      <h2 class="section-title">교육 타입 5가지 상세</h2>
+      <p class="section-desc">각 타입은 서로를 보완하며 <strong>현장형 역량</strong>을 키웁니다.</p>
+    </div>
+
+    <!-- 타입 1: 팀 프로젝트 -->
+    <div class="type-detail type-1">
+      <div class="type-header">
+        <div class="type-number">01</div>
+        <div class="type-icon">🎯</div>
+        <div class="type-title-wrap">
+          <div class="type-title">팀 프로젝트 (Team Project)</div>
+          <div class="type-title-en">팀이 하나의 현장 문제를 끝까지 해결하는 핵심 교육 방식</div>
+        </div>
+        <div class="type-tag">CORE</div>
+      </div>
+      <div class="type-body">
+        <p class="type-description">
+          팀이 하나의 <strong>현장 문제를 선정</strong>하고, <strong>데이터 수집 → AI 모델 학습 → 로봇 적용</strong>까지
+          전 과정을 직접 수행합니다. 이 교육의 가장 큰 핵심이며, 다른 모든 활동은 이 프로젝트에 수렴합니다.
+        </p>
+
+        <div class="type-examples">
+          <div class="type-examples-title">현장 적용 예시</div>
+          <div class="example-item">
+            <span class="example-icon">🦾</span>
+            <div class="example-text"><strong>로봇팔(SO-ARM101):</strong> 컬러/위치 기반 물체 분류 후 자동 집기</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">🚗</span>
+            <div class="example-text"><strong>자율주행 로봇(LeKiwi):</strong> 장애물 회피 + 목적지 자동 이동</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">📷</span>
+            <div class="example-text"><strong>RealSense 카메라:</strong> 깊이(Depth) 기반 물체 거리 인식 후 안전 정지</div>
+          </div>
+        </div>
+
+        <div class="type-result">
+          <span class="type-result-icon">👉</span>
+          <span>결과: 실제 동작하는 AI 시스템 구현</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타입 2: 팀 미션 -->
+    <div class="type-detail type-2">
+      <div class="type-header">
+        <div class="type-number">02</div>
+        <div class="type-icon">🧠</div>
+        <div class="type-title-wrap">
+          <div class="type-title">팀 미션 + 토의 (Team Mission &amp; Discussion)</div>
+          <div class="type-title-en">팀이 함께 해결 전략을 토의하고 설계 방향을 결정</div>
+        </div>
+        <div class="type-tag">DESIGN</div>
+      </div>
+      <div class="type-body">
+        <p class="type-description">
+          주어진 문제에 대해 팀이 <strong>해결 전략을 토의</strong>하고, <strong>설계 방향을 결정</strong>하는 과정입니다.
+          어떤 접근이 옳은지 정답이 없는 문제를 다루며, 토론을 통해 최적해를 찾는 훈련을 합니다.
+        </p>
+
+        <div class="type-examples">
+          <div class="type-examples-title">토의 주제 예시</div>
+          <div class="example-item">
+            <span class="example-icon">🦾</span>
+            <div class="example-text"><strong>로봇팔:</strong> "잡기 실패 원인은 데이터 부족인가? 모델 문제인가?"</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">🚗</span>
+            <div class="example-text"><strong>자율주행:</strong> "카메라 vs LiDAR — 어떤 센서를 선택할 것인가?"</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">📷</span>
+            <div class="example-text"><strong>RealSense:</strong> "2D 이미지보다 Depth를 써야 하는 이유는 무엇인가?"</div>
+          </div>
+        </div>
+
+        <div class="type-result">
+          <span class="type-result-icon">👉</span>
+          <span>결과: AI 시스템 설계 능력 향상</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타입 3: 개인 미션 -->
+    <div class="type-detail type-3">
+      <div class="type-header">
+        <div class="type-number">03</div>
+        <div class="type-icon">🔬</div>
+        <div class="type-title-wrap">
+          <div class="type-title">개인 미션 + 토의 (Individual Mission &amp; Discussion)</div>
+          <div class="type-title-en">각자 다른 방식으로 AI를 구현하고 결과를 비교</div>
+        </div>
+        <div class="type-tag">EXPERIMENT</div>
+      </div>
+      <div class="type-body">
+        <p class="type-description">
+          각자 <strong>다른 도구나 알고리즘으로 AI를 구현</strong>하고, 이후 결과를 공유 및 비교하는 과정입니다.
+          ChatGPT · Claude · Gemini 등 AI 도구는 <strong>팀의 새로운 멤버</strong>로 활용됩니다.
+        </p>
+
+        <div class="type-examples">
+          <div class="type-examples-title">개인별 접근 방식 예시</div>
+          <div class="example-item">
+            <span class="example-icon">🅰️</span>
+            <div class="example-text"><strong>A 멤버:</strong> ChatGPT를 활용해 YOLO 기반 물체 인식 구현</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">🅱️</span>
+            <div class="example-text"><strong>B 멤버:</strong> Claude로 코드 구조 설계 및 모듈 분리</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">🅲</span>
+            <div class="example-text"><strong>C 멤버:</strong> Gemini로 멀티모달(이미지+텍스트) 접근</div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">📊</span>
+            <div class="example-text"><strong>비교 분석:</strong> 알고리즘별 집기 성공률 / 경로 탐색 효율 비교</div>
+          </div>
+        </div>
+
+        <div class="type-result">
+          <span class="type-result-icon">👉</span>
+          <span>결과: 다양한 접근 방식 학습 + 비교 분석 능력</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타입 4: 팀 퀴즈 -->
+    <div class="type-detail type-4">
+      <div class="type-header">
+        <div class="type-number">04</div>
+        <div class="type-icon">🤝</div>
+        <div class="type-title-wrap">
+          <div class="type-title">팀 퀴즈 (Team Quiz)</div>
+          <div class="type-title-en">팀 단위로 협업하며 문제 원인을 분석</div>
+        </div>
+        <div class="type-tag">DEBUG</div>
+      </div>
+      <div class="type-body">
+        <p class="type-description">
+          팀 단위로 문제를 해결하며, <strong>협업을 통해 정답을 도출</strong>하는 활동입니다.
+          단순 암기가 아니라 <strong>"왜 실패했는가"를 같이 추론</strong>하는 디버깅 훈련입니다.
+        </p>
+
+        <div class="type-examples">
+          <div class="type-examples-title">팀 퀴즈 예시</div>
+          <div class="example-item">
+            <span class="example-icon">❓</span>
+            <div class="example-text"><strong>로봇팔이 물체를 놓치는 이유는?</strong><br>
+              <span style="color:var(--color-muted); font-size:0.88rem;">→ 센서 노이즈 / 좌표 오차 / 모델 오인식 중 어디가 원인일까?</span></div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">❓</span>
+            <div class="example-text"><strong>자율주행 로봇이 벽에 부딪히는 원인은?</strong><br>
+              <span style="color:var(--color-muted); font-size:0.88rem;">→ 매핑 오류 / 센서 사각지대 / 제어 지연?</span></div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">❓</span>
+            <div class="example-text"><strong>RealSense Depth 값이 틀어지는 이유는?</strong><br>
+              <span style="color:var(--color-muted); font-size:0.88rem;">→ 조명 / 반사면 / 캘리브레이션 문제?</span></div>
+          </div>
+        </div>
+
+        <div class="type-result">
+          <span class="type-result-icon">👉</span>
+          <span>결과: 문제 분석 능력 + 협업 강화</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 타입 5: 개인 퀴즈 -->
+    <div class="type-detail type-5">
+      <div class="type-header">
+        <div class="type-number">05</div>
+        <div class="type-icon">✏️</div>
+        <div class="type-title-wrap">
+          <div class="type-title">개인 퀴즈 (Individual Quiz)</div>
+          <div class="type-title-en">각자의 이해도를 점검하고 핵심 개념을 빠르게 확인</div>
+        </div>
+        <div class="type-tag">CHECK</div>
+      </div>
+      <div class="type-body">
+        <p class="type-description">
+          각자의 <strong>이해도를 확인</strong>하고, <strong>핵심 개념을 빠르게 점검</strong>하는 활동입니다.
+          짧고 명확하게, 매 차시 끝에 자연스럽게 진행됩니다.
+        </p>
+
+        <div class="type-examples">
+          <div class="type-examples-title">개인 퀴즈 예시</div>
+          <div class="example-item">
+            <span class="example-icon">📌</span>
+            <div class="example-text"><strong>YOLO는 무엇을 하는 모델인가?</strong></div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">📌</span>
+            <div class="example-text"><strong>Depth 카메라는 왜 필요한가?</strong></div>
+          </div>
+          <div class="example-item">
+            <span class="example-icon">📌</span>
+            <div class="example-text"><strong>AI 모델이 현장에서 실패하는 가장 큰 이유는?</strong></div>
+          </div>
+        </div>
+
+        <div class="type-result">
+          <span class="type-result-icon">👉</span>
+          <span>결과: 개인 이해도 점검</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Mini Smart Factory 환경 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Practice Environment</span>
+      <h2 class="section-title">실전 교육 환경 — Mini Smart Factory</h2>
+      <p class="section-desc">
+        실제 공장과 동일한 구조의 <strong>축소판 스마트팩토리</strong>가 교육 현장에 그대로 구축됩니다.
+      </p>
+    </div>
+
+    <div class="factory-stack">
+      <div class="stack-layer sl-1">
+        <div class="stack-icon">🤖</div>
+        <div class="stack-content">
+          <div class="stack-title">로봇 (Robot)</div>
+          <div class="stack-desc">SO-ARM101 로봇팔 · LeKiwi 모바일 베이스 · 자율주행 플랫폼</div>
+        </div>
+      </div>
+      <div class="stack-arrow">▼</div>
+
+      <div class="stack-layer sl-2">
+        <div class="stack-icon">📷</div>
+        <div class="stack-content">
+          <div class="stack-title">센서 (Sensor)</div>
+          <div class="stack-desc">RealSense Depth 카메라 · RGB 카메라 · IMU · 엔코더</div>
+        </div>
+      </div>
+      <div class="stack-arrow">▼</div>
+
+      <div class="stack-layer sl-3">
+        <div class="stack-icon">🌐</div>
+        <div class="stack-content">
+          <div class="stack-title">네트워크 (Network)</div>
+          <div class="stack-desc">기가비트 인프라 · MQTT · UNS · 실시간 데이터 스트리밍</div>
+        </div>
+      </div>
+      <div class="stack-arrow">▼</div>
+
+      <div class="stack-layer sl-4">
+        <div class="stack-icon">⚡</div>
+        <div class="stack-content">
+          <div class="stack-title">GPU 서버 (Compute)</div>
+          <div class="stack-desc">RTX 4090 / 4070 / 3080 · Edge NUC · AI 학습 및 추론</div>
+        </div>
+      </div>
+      <div class="stack-arrow">▼</div>
+
+      <div class="stack-layer sl-5">
+        <div class="stack-icon">🧠</div>
+        <div class="stack-content">
+          <div class="stack-title">AI 모델 (Model)</div>
+          <div class="stack-desc">VLA · YOLO · Diffusion Policy · LeRobot 프레임워크</div>
+        </div>
+      </div>
+
+      <div class="factory-conclusion">
+        👉 AI · 로봇 · 데이터 · 네트워크가 하나로 통합된 실습 환경
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3인 1팀 운영 구조 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Team Structure</span>
+      <h2 class="section-title">3인 1팀 운영 구조 — 5단계 사이클</h2>
+      <p class="section-desc">
+        팀은 단순한 그룹이 아닙니다. 협업하며 경쟁하고, 서로 검증하는 <strong>학습 공동체</strong>입니다.
+      </p>
+    </div>
+
+    <div class="team-flow">
+      <div class="team-step">
+        <div class="team-step-num">1</div>
+        <div class="team-step-title">팀 문제 정의</div>
+        <div class="team-step-desc">현장에서 풀고 싶은<br>AI 문제 선정</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">2</div>
+        <div class="team-step-title">개인별 AI 구현</div>
+        <div class="team-step-desc">각자 다른 도구·<br>알고리즘으로 시도</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">3</div>
+        <div class="team-step-title">결과 공유 + 토의</div>
+        <div class="team-step-desc">왜 잘 됐고<br>왜 안 됐는지 분석</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">4</div>
+        <div class="team-step-title">최적 모델 통합</div>
+        <div class="team-step-desc">팀의 베스트<br>접근 통합</div>
+      </div>
+      <div class="team-step">
+        <div class="team-step-num">5</div>
+        <div class="team-step-title">실제 로봇 적용</div>
+        <div class="team-step-desc">Mini 스마트팩토리에<br>배포 + 검증</div>
+      </div>
+    </div>
+
+    <div class="team-conclusion">
+      💡 <strong>협업 + 경쟁 + 검증</strong> 기반 학습 — 혼자서는 닿지 못하는 깊이까지 함께 도달
+    </div>
+  </div>
+</section>
+
+<!-- ========== 실습 시나리오 진화 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Scenario Evolution</span>
+      <h2 class="section-title">AI는 이렇게 진화합니다</h2>
+      <p class="section-desc">
+        보는 AI에서 → 판단하는 AI로 → 행동하는 AI까지,<br>
+        교육 과정에서 <strong>AI의 3단계 진화</strong>를 모두 경험합니다.
+      </p>
+    </div>
+
+    <div class="scenario-evolution">
+      <div class="scenario-card sc-1">
+        <div class="scenario-icon">👁️</div>
+        <div class="scenario-stage">Stage 1</div>
+        <div class="scenario-title">보는 AI</div>
+        <div class="scenario-desc">RealSense로 거리·물체를<br>인식 (Perception)</div>
+      </div>
+
+      <div class="scenario-arrow">→</div>
+
+      <div class="scenario-card sc-2">
+        <div class="scenario-icon">🧠</div>
+        <div class="scenario-stage">Stage 2</div>
+        <div class="scenario-title">판단하는 AI</div>
+        <div class="scenario-desc">충돌 위험 판단 + 경로<br>계획 (Decision)</div>
+      </div>
+
+      <div class="scenario-arrow">→</div>
+
+      <div class="scenario-card sc-3">
+        <div class="scenario-icon">🦾</div>
+        <div class="scenario-stage">Stage 3</div>
+        <div class="scenario-title">행동하는 AI</div>
+        <div class="scenario-desc">로봇팔 집기 + 자율주행<br>실행 (Action)</div>
+      </div>
+    </div>
+
+    <div class="team-conclusion">
+      🤖 단순 학습이 아니라, <strong>현장에서 작동하는 AI 시스템</strong>을 직접 만드는 경험
+    </div>
+  </div>
+</section>
+
+<!-- ========== 기대 효과 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Expected Outcomes</span>
+      <h2 class="section-title">기대 효과</h2>
+      <p class="section-desc">교육이 끝난 직후, <strong>현장에서 바로 적용 가능한 역량</strong>이 남습니다.</p>
+    </div>
+
+    <div class="effect-grid">
+      <div class="effect-card">
+        <div class="effect-icon">🎯</div>
+        <div class="effect-title">AI를 적용하는 수준으로 전환</div>
+        <div class="effect-desc">
+          이해하는 단계를 넘어,<br>실제 문제에 AI를 <strong>적용</strong>할 수 있는 단계로 도약
+        </div>
+      </div>
+      <div class="effect-card">
+        <div class="effect-icon">👥</div>
+        <div class="effect-title">팀 기반 문제 해결 능력</div>
+        <div class="effect-desc">
+          개인 역량을 넘어 <strong>조직 단위로 AI를 도입</strong>할 수 있는 협업 역량 확보
+        </div>
+      </div>
+      <div class="effect-card">
+        <div class="effect-icon">🏭</div>
+        <div class="effect-title">현장 적용 중심</div>
+        <div class="effect-desc">
+          이론이 아니라 <strong>현장에서 검증된 방법론</strong>이 자기 것이 됨
+        </div>
+      </div>
+      <div class="effect-card">
+        <div class="effect-icon">🚀</div>
+        <div class="effect-title">즉시 현장 적용 가능</div>
+        <div class="effect-desc">
+          교육 종료 직후, <strong>자기 공장의 문제</strong>에 바로 동일한 방법론을 적용 가능
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 핵심 차별성 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">What Makes Us Different</span>
+      <h2 class="section-title">핵심 차별성</h2>
+    </div>
+
+    <div class="differentiator">
+      <h3 style="font-size: 1.5rem; font-weight: 700; opacity: 0.9;">단순 AI 교육과는 다릅니다</h3>
+
+      <div class="diff-grid">
+        <div class="diff-item diff-cross">단순 AI 이론 강의</div>
+        <div class="diff-arrow">→</div>
+        <div class="diff-item diff-check">실제 공장 문제 해결 프로젝트</div>
+      </div>
+
+      <div class="diff-conclusion">
+        "Mini 스마트팩토리를 그대로 교육에 구현"
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 최종 목표 + FCLA 메시지 ========== -->
+<section>
+  <div class="container">
+    <div class="final-goal">
+      <span class="goal-eyebrow">🏁 최종 목표</span>
+      <p class="goal-text">
+        "내 공장의 문제를 AI로 해결할 수 있는<br>실무형 인재 양성"
+      </p>
+      <p class="goal-fcla">
+        <strong>FCLA (Field-Connected Learning Approach)</strong><br>
+        AI는 똑똑한 모델이 아니라,<br>
+        현장 데이터가 학습으로 되돌아오는 순환 구조가 완성될 때 산업이 된다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 푸터 ========== -->
+<footer class="footer">
+  <div class="container">
+    <p><strong>팀 중심 기반 피지컬 AI 교육방법</strong> · FCLA Curriculum · Handong University Partnership</p>
+    <p style="margin-top: 0.5rem; opacity: 0.7;">© Physical AI Leadership Education Program</p>
+  </div>
+</footer>
+
+</body>
+</html>

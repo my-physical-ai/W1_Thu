@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>팀 베이스 피지컬 AI 교육 — 추진 청사진 (Master Blueprint)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-primary: #0E7490;
+  --color-primary-light: #CFFAFE;
+  --color-primary-dark: #164E63;
+  --color-cyan: #06B6D4;
+  --color-cyan-light: #ECFEFF;
+  --color-navy: #0F172A;
+  --color-navy-light: #1E293B;
+  --color-gold: #F59E0B;
+  --color-gold-light: #FEF3C7;
+  --color-gold-dark: #B45309;
+  --color-success: #059669;
+  --color-success-light: #D1FAE5;
+  --color-warning: #DC2626;
+  --color-warning-light: #FEE2E2;
+  --color-purple: #7C3AED;
+  --color-purple-light: #EDE9FE;
+  --color-pink: #DB2777;
+  --color-pink-light: #FCE7F3;
+  --color-surface: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-text: #1E293B;
+  --color-muted: #64748B;
+  --color-border: #E2E8F0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--color-text);
+  background: var(--color-surface);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+
+.container { max-width: 1040px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4rem 0; }
+
+/* === HERO (Blueprint Style) === */
+.hero {
+  background:
+    linear-gradient(135deg, #0F172A 0%, #164E63 60%, #0E7490 100%);
+  color: white;
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(6,182,212,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6,182,212,0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(6,182,212,0.25) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero .container { position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(252,211,77,0.15);
+  border: 1px solid rgba(252,211,77,0.4);
+  color: #FCD34D;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+.hero h1 .accent {
+  background: linear-gradient(90deg, #FCD34D 0%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.65;
+  opacity: 0.92;
+  max-width: 760px;
+  margin-bottom: 2rem;
+}
+.hero-quote {
+  display: inline-block;
+  border-left: 4px solid #FCD34D;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 760px;
+}
+.hero-meta {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+.hero-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.hero-meta-item::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #FCD34D;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* === SECTION HEADER === */
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-eyebrow {
+  display: inline-block;
+  background: var(--color-cyan-light);
+  color: var(--color-primary);
+  padding: 0.35rem 1rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-primary-light);
+}
+.section-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.section-desc {
+  font-size: 1.05rem;
+  color: var(--color-muted);
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.section-desc strong { color: var(--color-text); }
+
+/* === 차별화 3계층 (Stack with Highlight) === */
+.diff-stack-wrap {
+  background:
+    linear-gradient(180deg, #F8FAFC 0%, #ECFEFF 100%);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+}
+.diff-stack-label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+}
+.diff-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+}
+.diff-layer {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  border: 2px solid;
+  background: white;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.diff-layer:hover {
+  transform: translateX(4px);
+  box-shadow: 0 8px 16px rgba(14,116,144,0.12);
+}
+.diff-layer-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  width: 56px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  letter-spacing: 0.05em;
+}
+.diff-layer-title {
+  font-weight: 900;
+  font-size: 1.05rem;
+  margin-bottom: 0.15rem;
+}
+.diff-layer-desc {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+.diff-layer-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.dl-base { border-color: #CBD5E1; opacity: 0.92; }
+.dl-base .diff-layer-num { background: #E2E8F0; color: #475569; }
+.dl-base .diff-layer-tag { background: #F1F5F9; color: #475569; }
+
+.dl-new {
+  border-color: var(--color-gold);
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FFFBEB 100%);
+  box-shadow: 0 4px 12px rgba(245,158,11,0.15);
+}
+.dl-new .diff-layer-num {
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+  color: white;
+  box-shadow: 0 2px 4px rgba(245,158,11,0.3);
+}
+.dl-new .diff-layer-tag {
+  background: var(--color-gold);
+  color: white;
+}
+.dl-new .diff-layer-title { color: var(--color-gold-dark); }
+
+.diff-conclusion {
+  text-align: center;
+  margin-top: 2rem;
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: 1.25rem 2rem;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.diff-conclusion .accent { color: #FCD34D; }
+
+/* === SO101 / LeKiwi 비교 === */
+.combo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.combo-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+}
+.combo-header {
+  padding: 1.5rem 1.75rem;
+  color: white;
+  position: relative;
+}
+.combo-header::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100px; height: 100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.combo-1 .combo-header { background: linear-gradient(135deg, #0E7490 0%, #06B6D4 100%); }
+.combo-2 .combo-header { background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%); }
+.combo-icon {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+.combo-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+.combo-role {
+  font-size: 0.88rem;
+  opacity: 0.92;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+.combo-body { padding: 1.5rem 1.75rem; }
+.combo-feature {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--color-border);
+}
+.combo-feature:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.combo-feature-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.35rem;
+}
+.combo-feature-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.combo-feature-text strong { color: var(--color-primary); font-weight: 700; }
+.combo-2 .combo-feature-text strong { color: var(--color-purple); }
+
+.combo-conclusion {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border-left: 4px solid var(--color-gold);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 12px 12px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-gold-dark);
+  line-height: 1.65;
+}
+
+/* === 6가지 학습목표 === */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.goal-card {
+  background: white;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: all 0.2s;
+  border-top: 4px solid;
+}
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+.goal-card:nth-child(1) { border-top-color: var(--color-cyan); }
+.goal-card:nth-child(2) { border-top-color: var(--color-primary); }
+.goal-card:nth-child(3) { border-top-color: var(--color-purple); }
+.goal-card:nth-child(4) { border-top-color: var(--color-pink); }
+.goal-card:nth-child(5) { border-top-color: var(--color-warning); }
+.goal-card:nth-child(6) { border-top-color: var(--color-gold); }
+
+.goal-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+}
+.goal-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.goal-title {
+  font-size: 1.05rem;
+  font-weight: 900;
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+}
+.goal-desc {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+/* === 모델 적합성 매트릭스 === */
+.matrix-intro {
+  background: linear-gradient(135deg, #0F172A 0%, #164E63 100%);
+  color: white;
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.matrix-intro::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(252,211,77,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.matrix-intro-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: #FCD34D;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+.matrix-intro-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+.matrix-intro-text .strike {
+  text-decoration: line-through;
+  text-decoration-color: rgba(220,38,38,0.7);
+  text-decoration-thickness: 2px;
+  opacity: 0.7;
+}
+.matrix-intro-text .accent { color: #FCD34D; }
+
+.matrix-platforms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.platform-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.platform-header {
+  padding: 1.25rem 1.5rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.platform-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+.platform-1 .platform-icon { background: var(--color-primary-light); }
+.platform-2 .platform-icon { background: var(--color-purple-light); }
+.platform-name {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 0.1rem;
+}
+.platform-tag {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+.platform-body { padding: 1.25rem 1.5rem 1.5rem; }
+
+.model-progression {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 1rem 0 1.25rem;
+  flex-wrap: wrap;
+}
+.model-chip {
+  background: var(--color-card);
+  border: 2px solid var(--color-border);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+.model-chip.baseline {
+  border-color: var(--color-success);
+  background: var(--color-success-light);
+  color: #047857;
+}
+.model-chip.middle {
+  border-color: var(--color-cyan);
+  background: var(--color-cyan-light);
+  color: var(--color-primary-dark);
+}
+.model-chip.advanced {
+  border-color: var(--color-purple);
+  background: var(--color-purple-light);
+  color: #5B21B6;
+}
+.model-arrow {
+  color: var(--color-muted);
+  font-weight: 900;
+  font-size: 0.95rem;
+}
+
+.platform-rationale {
+  background: var(--color-surface);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+.platform-rationale strong { color: var(--color-primary); }
+.platform-2 .platform-rationale strong { color: var(--color-purple); }
+
+.matrix-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* === Async Inference 섹션 === */
+.async-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+.async-card {
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  position: relative;
+}
+.async-bad {
+  background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+  border: 2px solid var(--color-warning);
+}
+.async-good {
+  background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+  border: 2px solid var(--color-success);
+}
+.async-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.async-bad .async-label { background: var(--color-warning); color: white; }
+.async-good .async-label { background: var(--color-success); color: white; }
+.async-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+.async-bad .async-title { color: #991B1B; }
+.async-good .async-title { color: #065F46; }
+.async-timeline {
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+.timeline-row { display: flex; align-items: center; gap: 0.5rem; }
+.tl-bar { display: inline-block; height: 14px; border-radius: 3px; }
+.tl-infer { background: #DC2626; }
+.tl-infer-good { background: #06B6D4; }
+.tl-act { background: #059669; }
+.tl-idle { background: repeating-linear-gradient(45deg, #FCA5A5, #FCA5A5 4px, #FECACA 4px, #FECACA 8px); }
+.async-note {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text);
+}
+.async-bad .async-note { color: #7F1D1D; }
+.async-good .async-note { color: #064E3B; }
+.async-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-primary);
+}
+.async-result {
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  color: white;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.async-result-num {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #FCD34D;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.async-result-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.92;
+}
+
+.async-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.metric-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s;
+}
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+.metric-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.metric-name {
+  font-size: 0.88rem;
+  font-weight: 900;
+  margin-bottom: 0.35rem;
+  color: var(--color-text);
+}
+.metric-desc {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.55;
+}
+
+/* === 추진 로드맵 === */
+.roadmap {
+  background: linear-gradient(180deg, #F8FAFC 0%, #ECFEFF 100%);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid var(--color-border);
+  position: relative;
+}
+.roadmap::before {
+  content: 'BLUEPRINT // ROADMAP';
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: var(--color-muted);
+}
+.roadmap-track {
+  position: relative;
+  margin-top: 2rem;
+}
+.roadmap-track::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg,
+    var(--color-cyan) 0%,
+    var(--color-primary) 25%,
+    var(--color-purple) 50%,
+    var(--color-pink) 75%,
+    var(--color-gold) 100%);
+}
+.roadmap-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.roadmap-step:last-child { margin-bottom: 0; }
+.roadmap-marker {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 3px solid;
+  font-weight: 900;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.roadmap-step:nth-child(1) .roadmap-marker { border-color: var(--color-cyan); color: var(--color-cyan); }
+.roadmap-step:nth-child(2) .roadmap-marker { border-color: var(--color-primary); color: var(--color-primary); }
+.roadmap-step:nth-child(3) .roadmap-marker { border-color: var(--color-purple); color: var(--color-purple); }
+.roadmap-step:nth-child(4) .roadmap-marker { border-color: var(--color-pink); color: var(--color-pink); }
+.roadmap-step:nth-child(5) .roadmap-marker { border-color: var(--color-gold); color: var(--color-gold-dark); }
+
+.roadmap-content {
+  background: white;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+.roadmap-title {
+  font-size: 1.08rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.roadmap-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+.roadmap-desc {
+  font-size: 0.92rem;
+  color: var(--color-muted);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.roadmap-deliv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.roadmap-deliv-item {
+  background: var(--color-cyan-light);
+  color: var(--color-primary-dark);
+  padding: 0.25rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+/* === 마무리 메시지 === */
+.closing-message {
+  background:
+    linear-gradient(135deg, #0F172A 0%, #164E63 60%, #0E7490 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.closing-message::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(252,211,77,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(252,211,77,0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.closing-message::after {
+  content: '';
+  position: absolute;
+  bottom: -20%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(252,211,77,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.closing-message > * { position: relative; z-index: 1; }
+.closing-eyebrow {
+  display: inline-block;
+  background: rgba(252,211,77,0.2);
+  border: 1px solid rgba(252,211,77,0.4);
+  color: #FCD34D;
+  padding: 0.4rem 1.25rem;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.closing-text {
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1.45;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+.closing-text .accent {
+  background: linear-gradient(90deg, #FCD34D, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-fcla {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.92;
+  line-height: 1.7;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === 푸터 === */
+.footer {
+  background: #0F172A;
+  color: #94A3B8;
+  padding: 2rem 0;
+  text-align: center;
+  font-size: 0.88rem;
+}
+.footer strong { color: white; }
+.footer-mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  opacity: 0.65;
+}
+
+/* === 반응형 === */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .hero-subtitle { font-size: 1rem; }
+  .section-title { font-size: 1.6rem; }
+
+  .combo-grid { grid-template-columns: 1fr; }
+  .goals-grid { grid-template-columns: 1fr; }
+  .matrix-platforms { grid-template-columns: 1fr; }
+
+  .async-comparison { grid-template-columns: 1fr; }
+  .async-arrow { transform: rotate(90deg); padding: 0.25rem 0; }
+  .async-metrics { grid-template-columns: 1fr 1fr; }
+
+  .diff-layer {
+    grid-template-columns: 48px 1fr;
+    gap: 0.75rem;
+  }
+  .diff-layer-tag {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-top: 0.25rem;
+  }
+
+  .roadmap-step { grid-template-columns: 44px 1fr; gap: 1rem; }
+  .roadmap-marker { width: 44px; height: 44px; font-size: 0.9rem; }
+  .roadmap-track::before { left: 22px; }
+
+  .closing-text { font-size: 1.25rem; }
+}
+
+/* === 인쇄 === */
+@media print {
+  body { background: white; }
+  .hero, .closing-message, .matrix-intro, .async-result {
+    background: #0F172A !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  section { page-break-inside: avoid; padding: 1.5rem 0; }
+  .goal-card, .roadmap-step, .platform-card, .diff-layer { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span>◆</span> Master Blueprint · 추진 청사진 V1
+    </div>
+    <h1>팀 베이스 피지컬 AI 교육<br><span class="accent">우리는 무엇이 다른가</span></h1>
+    <p class="hero-subtitle">
+      모델 한 개를 잘 다루는 교육이 아닙니다. <strong>관제 · 프로토콜 · 공정 KPI</strong>까지
+      통합 설계하는 현장형 시스템 교육입니다.<br>
+      이 자료는 교육생에게 우리가 <strong>무엇을, 왜, 어떻게</strong> 추진하는지 보여주는 공식 청사진입니다.
+    </p>
+    <div class="hero-quote">
+      "어떤 모델이 최고냐를 정하는 것이 아니라,<br>
+      어떤 공정·로봇·디바이스·지연 예산에서 어떤 모델이 맞는가를 판단하는 능력 — 그것이 우리의 학습 목표입니다."
+    </div>
+    <div class="hero-meta">
+      <span class="hero-meta-item">SO-ARM101 + LeKiwi</span>
+      <span class="hero-meta-item">LeRobot · SmolVLA · pi₀-fast</span>
+      <span class="hero-meta-item">Edge ↔ Cloud Async Inference</span>
+      <span class="hero-meta-item">FCLA Curriculum</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== 1. 우리의 차별화 — 3계층 추가 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 01 Differentiation</span>
+      <h2 class="section-title">우리만의 차별화 — 3계층을 추가한다</h2>
+      <p class="section-desc">
+        대부분의 AI 교육은 <strong>모델·로봇·데이터</strong>까지만 다룹니다.<br>
+        우리는 그 위에 <strong>관제 · 프로토콜 · 공정 KPI</strong> 3계층을 추가해
+        현장에서 실제로 작동하는 시스템 설계 능력을 가르칩니다.
+      </p>
+    </div>
+
+    <div class="diff-stack-wrap">
+      <span class="diff-stack-label">// SYSTEM STACK — 6 LAYERS</span>
+
+      <div class="diff-stack">
+
+        <div class="diff-layer dl-new">
+          <div class="diff-layer-num">L6</div>
+          <div>
+            <div class="diff-layer-title">⭐ 공정 KPI 계층</div>
+            <div class="diff-layer-desc">사이클 타임 · OEE · 양품률 · 안전 지표와 직접 연결된 발표 · 문서화</div>
+          </div>
+          <span class="diff-layer-tag">우리만 다룸</span>
+        </div>
+
+        <div class="diff-layer dl-new">
+          <div class="diff-layer-num">L5</div>
+          <div>
+            <div class="diff-layer-title">⭐ 프로토콜 계층</div>
+            <div class="diff-layer-desc">MQTT · UNS · OPC UA · ROS2 토픽/액션 · OT/IT 연동의 표준 인터페이스</div>
+          </div>
+          <span class="diff-layer-tag">우리만 다룸</span>
+        </div>
+
+        <div class="diff-layer dl-new">
+          <div class="diff-layer-num">L4</div>
+          <div>
+            <div class="diff-layer-title">⭐ 관제 계층</div>
+            <div class="diff-layer-desc">Edge / Local Server / Cloud 분할 · 안전 · 지연 예산 · 장애 복구 설계</div>
+          </div>
+          <span class="diff-layer-tag">우리만 다룸</span>
+        </div>
+
+        <div class="diff-layer dl-base">
+          <div class="diff-layer-num">L3</div>
+          <div>
+            <div class="diff-layer-title">AI 모델 계층</div>
+            <div class="diff-layer-desc">ACT · Diffusion Policy · SmolVLA · pi₀-fast · WorldVLA</div>
+          </div>
+          <span class="diff-layer-tag">기존 교육</span>
+        </div>
+
+        <div class="diff-layer dl-base">
+          <div class="diff-layer-num">L2</div>
+          <div>
+            <div class="diff-layer-title">데이터 / Demonstration 계층</div>
+            <div class="diff-layer-desc">Teleop 수집 · Telemetry · 라벨링 · 데이터셋 설계</div>
+          </div>
+          <span class="diff-layer-tag">기존 교육</span>
+        </div>
+
+        <div class="diff-layer dl-base">
+          <div class="diff-layer-num">L1</div>
+          <div>
+            <div class="diff-layer-title">로봇 / 센서 계층</div>
+            <div class="diff-layer-desc">SO-ARM101 · LeKiwi · RealSense · 모터 · 인코더</div>
+          </div>
+          <span class="diff-layer-tag">기존 교육</span>
+        </div>
+
+      </div>
+
+      <div class="diff-conclusion">
+        💡 위 3개 계층(<span class="accent">L4 · L5 · L6</span>)을 함께 가르쳐야 비로소 <span class="accent">현장에서 작동하는 AI 시스템</span>이 됩니다
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. SO101 + LeKiwi 조합의 교육적 가치 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 02 Hardware Combo</span>
+      <h2 class="section-title">왜 SO-ARM101 + LeKiwi 조합인가</h2>
+      <p class="section-desc">
+        값비싼 산업용 로봇 한 대보다, <strong>저비용 오픈 하드웨어 두 종</strong>이 교육적으로 더 강력합니다.<br>
+        각자 다른 제약과 다른 학습 포인트를 만들어내기 때문입니다.
+      </p>
+    </div>
+
+    <div class="combo-grid">
+
+      <div class="combo-card combo-1">
+        <div class="combo-header">
+          <div class="combo-icon">🦾</div>
+          <div class="combo-name">SO-ARM101</div>
+          <div class="combo-role">Demonstration · 정밀 Manipulation 트랙</div>
+        </div>
+        <div class="combo-body">
+          <div class="combo-feature">
+            <div class="combo-feature-label">구조적 특징</div>
+            <div class="combo-feature-text">
+              <strong>Leader / Follower</strong> 구조 + 기어 구성이 달라
+              사람이 시범을 보이면서 데이터를 수집하기 좋은 설계
+            </div>
+          </div>
+          <div class="combo-feature">
+            <div class="combo-feature-label">교육 포인트</div>
+            <div class="combo-feature-text">
+              <strong>Teleop 기반 demonstration</strong> 수집 · 정밀 manipulation을
+              직접 손에 익히면서 배움
+            </div>
+          </div>
+          <div class="combo-feature">
+            <div class="combo-feature-label">학습 도달점</div>
+            <div class="combo-feature-text">
+              "데이터의 질이 모델의 질을 결정한다"는 명제를
+              <strong>몸으로 체득</strong>하게 됨
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="combo-card combo-2">
+        <div class="combo-header">
+          <div class="combo-icon">🛞</div>
+          <div class="combo-name">LeKiwi</div>
+          <div class="combo-role">Edge 제약 · Async Inference 트랙</div>
+        </div>
+        <div class="combo-body">
+          <div class="combo-feature">
+            <div class="combo-feature-label">구조적 특징</div>
+            <div class="combo-feature-text">
+              <strong>Raspberry Pi 또는 5V 구동 PC</strong>를 실어 운용하도록 설계 —
+              edge 제약을 일찍 드러내는 플랫폼
+            </div>
+          </div>
+          <div class="combo-feature">
+            <div class="combo-feature-label">교육 포인트</div>
+            <div class="combo-feature-text">
+              <strong>모바일 + 제한된 컴퓨트</strong> 환경에서
+              어떤 모델이 작동하고 어떤 모델이 멈추는지 직접 확인
+            </div>
+          </div>
+          <div class="combo-feature">
+            <div class="combo-feature-label">학습 도달점</div>
+            <div class="combo-feature-text">
+              <strong>Edge / Cloud 분할 · Async Inference</strong>의 필요성을
+              자연스럽게 깨닫게 됨
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="combo-conclusion">
+      💡 <strong>SmolVLA 공개 자료</strong>도 SO-ARM101, LeKiwi 같은 <strong>저비용 오픈 하드웨어</strong>를 실험 대상으로 명시하고 있습니다.
+      따라서 우리 교육의 <strong>저비용 — 고학습효과</strong> 메시지와 정확히 정합합니다.
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3. 6가지 학습목표 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 03 Learning Objectives</span>
+      <h2 class="section-title">교육이 끝났을 때 남아야 할 것 — 6가지 능력</h2>
+      <p class="section-desc">
+        암기한 지식이 아니라 <strong>현장에서 다시 꺼내 쓸 수 있는 사고 능력</strong>입니다.
+      </p>
+    </div>
+
+    <div class="goals-grid">
+      <div class="goal-card">
+        <div class="goal-num">G/01</div>
+        <span class="goal-icon">📐</span>
+        <div class="goal-title">공정을 데이터 구조로 해석</div>
+        <div class="goal-desc">
+          현장의 작업 흐름을 input · state · action · reward의
+          데이터 구조로 풀어내는 능력
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-num">G/02</div>
+        <span class="goal-icon">📊</span>
+        <div class="goal-title">Demonstration · Telemetry 데이터 설계</div>
+        <div class="goal-desc">
+          무엇을, 얼마나, 어떻게 수집·라벨링할 것인가를
+          처음부터 설계할 수 있는 능력
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-num">G/03</div>
+        <span class="goal-icon">🎯</span>
+        <div class="goal-title">모델 ↔ 디바이스 적합성 판단</div>
+        <div class="goal-desc">
+          공정·로봇·지연 예산을 보고 ACT / Diffusion / SmolVLA / pi₀-fast 중
+          어떤 것이 맞는지 결정할 수 있는 능력
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-num">G/04</div>
+        <span class="goal-icon">⚡</span>
+        <div class="goal-title">Edge / Cloud 분할 설계</div>
+        <div class="goal-desc">
+          어디서 추론하고 어디로 보낼 것인가 —
+          지연·대역폭·안전을 고려한 시스템 분할 능력
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-num">G/05</div>
+        <span class="goal-icon">🔌</span>
+        <div class="goal-title">OT / IT 연동 + 안전·지연 설계</div>
+        <div class="goal-desc">
+          MQTT · UNS · OPC UA를 통한 공장 시스템과의 연동,
+          안전 마진과 지연 예산까지 고려한 설계
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-num">G/06</div>
+        <span class="goal-icon">📋</span>
+        <div class="goal-title">KPI 연결 발표 · 문서화</div>
+        <div class="goal-desc">
+          기술 결과를 사이클 타임 · OEE · 양품률로 번역해
+          경영진에게 설득력 있게 전달하는 능력
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. 모델 ↔ 디바이스 적합성 매트릭스 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 04 Model–Device Fit</span>
+      <h2 class="section-title">모델 비교의 진짜 목적</h2>
+      <p class="section-desc">
+        ACT · Diffusion · SmolVLA · pi₀-fast · WorldVLA를 다 다루지만,<br>
+        <strong>"어느 모델이 짱이냐"가 아니라 "어떤 상황에 어떤 모델이 맞느냐"</strong>를 가르칩니다.
+      </p>
+    </div>
+
+    <div class="matrix-intro">
+      <div class="matrix-intro-label">// THINKING FRAME</div>
+      <div class="matrix-intro-text">
+        <span class="strike">"어떤 모델이 최고냐?"</span><br>
+        → <span class="accent">"어떤 공정 · 어떤 로봇 · 어떤 디바이스 · 어떤 지연 예산에서<br>
+        어떤 모델이 더 맞는가?"</span>
+      </div>
+    </div>
+
+    <div class="matrix-platforms">
+
+      <div class="platform-card platform-1">
+        <div class="platform-header">
+          <div class="platform-icon">🦾</div>
+          <div>
+            <div class="platform-name">SO-ARM101 트랙</div>
+            <div class="platform-tag">정밀 manipulation · 고정 작업대</div>
+          </div>
+        </div>
+        <div class="platform-body">
+          <div class="model-progression">
+            <span class="model-chip baseline">ACT</span>
+            <span class="model-arrow">→</span>
+            <span class="model-chip middle">Diffusion</span>
+            <span class="model-arrow">→</span>
+            <span class="model-chip advanced">SmolVLA</span>
+          </div>
+          <div class="platform-rationale">
+            첫 baseline은 <strong>ACT</strong>가 가장 좋습니다.
+            이후 <strong>Diffusion · SmolVLA</strong>로 올라가며
+            교육생이 <strong>"precision vs compute"</strong> 트레이드오프를
+            몸으로 이해하게 만드는 흐름이 가장 효과적입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="platform-card platform-2">
+        <div class="platform-header">
+          <div class="platform-icon">🛞</div>
+          <div>
+            <div class="platform-name">LeKiwi 트랙</div>
+            <div class="platform-tag">모바일 · 제한된 edge 컴퓨트</div>
+          </div>
+        </div>
+        <div class="platform-body">
+          <div class="model-progression">
+            <span class="model-chip middle">SmolVLA</span>
+            <span class="model-arrow">+</span>
+            <span class="model-chip advanced">pi₀-fast</span>
+          </div>
+          <div class="platform-rationale">
+            <strong>Perception–Language–Action</strong>과
+            <strong>Async / Remote Inference</strong>를
+            함께 보여주기 좋은 조합. 모바일 플랫폼에서는
+            모델 정확도만큼이나 <strong>큐 대기 시간 · 재계획 반응성 · 네트워크 추론</strong>
+            구조를 같이 평가해야 합니다.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="matrix-source">
+      // SOURCES: Hugging Face LeRobot docs · Physical Intelligence π-series · WorldVLA family
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5. Async Inference 의 의미 ========== -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 05 Async Inference</span>
+      <h2 class="section-title">왜 Async / Remote Inference를 가르치는가</h2>
+      <p class="section-desc">
+        큰 모델(bulky policy)을 모바일에서 그냥 돌리면, 로봇이 <strong>추론을 기다리는 동안 멈춰있습니다</strong>.<br>
+        이 문제를 해결하는 구조 자체가 교육의 핵심 포인트입니다.
+      </p>
+    </div>
+
+    <div class="async-comparison">
+
+      <div class="async-card async-bad">
+        <span class="async-label">▼ Sync · Naïve</span>
+        <h3 class="async-title">순차 추론 — 로봇이 기다린다</h3>
+        <div class="async-timeline">
+          <div class="timeline-row">
+            <span style="width:50px;">infer</span>
+            <span class="tl-bar tl-infer" style="width:80px;"></span>
+          </div>
+          <div class="timeline-row">
+            <span style="width:50px;">act</span>
+            <span class="tl-bar tl-idle" style="width:80px;"></span>
+            <span class="tl-bar tl-act" style="width:50px;"></span>
+          </div>
+        </div>
+        <div class="async-note">
+          추론이 끝날 때까지 로봇은 <strong>idle 상태</strong>로 대기.
+          큰 모델일수록 idle 시간이 길어져 작업 완료 시간이 늘어남.
+        </div>
+      </div>
+
+      <div class="async-arrow">→</div>
+
+      <div class="async-card async-good">
+        <span class="async-label">▲ Async Stack</span>
+        <h3 class="async-title">비동기 추론 — 동시에 진행</h3>
+        <div class="async-timeline">
+          <div class="timeline-row">
+            <span style="width:50px;">infer</span>
+            <span class="tl-bar tl-infer-good" style="width:80px;"></span>
+            <span class="tl-bar tl-infer-good" style="width:80px;"></span>
+          </div>
+          <div class="timeline-row">
+            <span style="width:50px;">act</span>
+            <span class="tl-bar tl-act" style="width:60px;"></span>
+            <span class="tl-bar tl-act" style="width:60px;"></span>
+            <span class="tl-bar tl-act" style="width:40px;"></span>
+          </div>
+        </div>
+        <div class="async-note">
+          추론과 행동이 <strong>파이프라인처럼 겹쳐 진행</strong>.
+          로봇은 멈추지 않고 계속 움직임.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="async-result">
+      <div class="async-result-num">≈ 2× 단축</div>
+      <div class="async-result-label">
+        SmolVLA <strong>async stack</strong> 적용 시 task completion time이 약 2배 개선된 사례 — 모델을 바꾸지 않고 <strong>실행 구조</strong>만 바꿔서 얻어지는 성능
+      </div>
+    </div>
+
+    <p style="text-align: center; margin: 2rem 0 1.5rem; color: var(--color-muted); font-weight: 500;">
+      따라서 모바일 플랫폼 평가는 <strong style="color: var(--color-text);">정확도 외에 다음 4가지 지표</strong>를 함께 봅니다 —
+    </p>
+
+    <div class="async-metrics">
+      <div class="metric-card">
+        <div class="metric-icon">🎯</div>
+        <div class="metric-name">Model Accuracy</div>
+        <div class="metric-desc">모델 자체의 추론 정확도</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">⏳</div>
+        <div class="metric-name">Queue Starvation</div>
+        <div class="metric-desc">로봇이 명령을 기다리는 시간</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">🔁</div>
+        <div class="metric-name">Replanning Responsiveness</div>
+        <div class="metric-desc">상황 변화 시 재계획 반응 속도</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">🌐</div>
+        <div class="metric-name">Networked Inference</div>
+        <div class="metric-desc">네트워크 추론 안정성·지연</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. 추진 로드맵 ========== -->
+<section style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">◆ 06 Roadmap</span>
+      <h2 class="section-title">우리는 이렇게 추진합니다 — 5단계 청사진</h2>
+      <p class="section-desc">
+        각 단계는 <strong>이전 단계의 결과물</strong>을 입력으로 받아 다음 단계로 이어집니다.<br>
+        팀 프로젝트 하나가 5단계를 모두 관통합니다.
+      </p>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-track">
+
+        <div class="roadmap-step">
+          <div class="roadmap-marker">S1</div>
+          <div class="roadmap-content">
+            <div class="roadmap-title">
+              현장 문제를 데이터 구조로 번역
+              <span class="roadmap-tag">G/01 · L1–L2</span>
+            </div>
+            <div class="roadmap-desc">
+              팀이 자기 공장의 문제를 골라, 그것을 input · state · action · reward 로 풀어 씁니다.
+              여기서 demonstration · telemetry 수집 계획을 함께 설계합니다.
+            </div>
+            <div class="roadmap-deliv">
+              <span class="roadmap-deliv-item">문제 정의서</span>
+              <span class="roadmap-deliv-item">데이터 수집 계획</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-marker">S2</div>
+          <div class="roadmap-content">
+            <div class="roadmap-title">
+              Teleop Demonstration 수집 + Baseline 학습
+              <span class="roadmap-tag">G/02 · L2–L3</span>
+            </div>
+            <div class="roadmap-desc">
+              SO-ARM101에서 leader/follower로 직접 시범을 보이며 데이터 수집.
+              ACT를 baseline으로 학습 — 데이터 질이 결과에 어떻게 반영되는지 관찰합니다.
+            </div>
+            <div class="roadmap-deliv">
+              <span class="roadmap-deliv-item">Teleop 데이터셋</span>
+              <span class="roadmap-deliv-item">ACT Baseline</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-marker">S3</div>
+          <div class="roadmap-content">
+            <div class="roadmap-title">
+              모델 비교 · 모델 ↔ 디바이스 적합성 판단
+              <span class="roadmap-tag">G/03 · L3</span>
+            </div>
+            <div class="roadmap-desc">
+              ACT → Diffusion → SmolVLA로 올라가며 SO-ARM101에서 비교.
+              LeKiwi에서는 SmolVLA · pi₀-fast로 모바일 환경에서 무엇이 다른지 직접 측정합니다.
+            </div>
+            <div class="roadmap-deliv">
+              <span class="roadmap-deliv-item">모델 비교 리포트</span>
+              <span class="roadmap-deliv-item">적합성 판단 근거</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-marker">S4</div>
+          <div class="roadmap-content">
+            <div class="roadmap-title">
+              Edge / Cloud 분할 + Async Inference + 프로토콜 연동
+              <span class="roadmap-tag">G/04 · G/05 · L4–L5</span>
+            </div>
+            <div class="roadmap-desc">
+              어디서 추론하고 어디로 보낼지 결정. MQTT · UNS · OPC UA로 공정 시스템과 연동하고,
+              지연·안전 예산을 만족하는 시스템 구조를 설계합니다.
+            </div>
+            <div class="roadmap-deliv">
+              <span class="roadmap-deliv-item">시스템 아키텍처</span>
+              <span class="roadmap-deliv-item">Async 파이프라인</span>
+              <span class="roadmap-deliv-item">프로토콜 연동</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-marker">S5</div>
+          <div class="roadmap-content">
+            <div class="roadmap-title">
+              KPI 연결 발표 — 경영 언어로 번역
+              <span class="roadmap-tag">G/06 · L6</span>
+            </div>
+            <div class="roadmap-desc">
+              기술 결과를 사이클 타임 · OEE · 양품률 · 안전 지표로 번역하여 발표.
+              "AI를 도입하면 무엇이 얼마나 좋아지는가"를 경영진이 결재할 수 있는 형식으로 정리합니다.
+            </div>
+            <div class="roadmap-deliv">
+              <span class="roadmap-deliv-item">KPI 리포트</span>
+              <span class="roadmap-deliv-item">발표 자료</span>
+              <span class="roadmap-deliv-item">투자회수 시뮬레이션</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 마무리 메시지 ========== -->
+<section>
+  <div class="container">
+    <div class="closing-message">
+      <span class="closing-eyebrow">◆ Message to Trainees</span>
+      <p class="closing-text">
+        교육이 끝났을 때 여러분 손에 남는 것은<br>
+        모델 한 개가 아니라, <span class="accent">"내 공장 문제를 시스템으로 풀어내는<br>
+        설계 능력"</span>입니다.
+      </p>
+      <p class="closing-fcla">
+        <strong>FCLA — Field-Connected Learning Approach</strong><br>
+        AI는 똑똑한 모델이 아니라,<br>
+        현장 데이터가 학습으로 되돌아오는 순환 구조가 완성될 때 산업이 된다.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 푸터 ========== -->
+<footer class="footer">
+  <div class="container">
+    <p><strong>팀 베이스 피지컬 AI 교육 — 추진 청사진</strong> · FCLA Curriculum · Handong University Partnership</p>
+    <p class="footer-mono">
+      // SO-ARM101 · LeKiwi · LeRobot · SmolVLA · pi₀-fast · ACT · Diffusion Policy · WorldVLA
+    </p>
+    <p style="margin-top: 0.75rem; opacity: 0.65;">© Physical AI Leadership Education Program · Master Blueprint v1.0</p>
+  </div>
+</footer>
+
+</body>
+</html>
